@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 22f0329746290ea418cc9f3728823dbf
+timeCreated: 1523722279
+licenseType: Pro
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Belisa plumilla manual
+  fontNames:
+  - Belisa plumilla manual
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
