@@ -23,10 +23,10 @@ public class SkinManager : MonoBehaviour {
     
     private void OnEnable()
     {
-        RefreshSkins();
-        GetDefSkin();
-        SetSkin(defSkin);
-        LoadSkinByString("1");
+       // RefreshSkins();
+       // GetDefSkin();
+       // SetSkin(defSkin);
+       // LoadSkinByString("1");
     }
 
     /// <summary>
@@ -75,7 +75,7 @@ public class SkinManager : MonoBehaviour {
     /// </summary>
     private void GetDefSkin()
     {
-        //Init
+       /* //Init
         defSkin = gameObject.AddComponent<Skin>();
         defSkin.skinName = "_default";
         defSkin.skinParts = new List<SkinPart>();
@@ -88,7 +88,7 @@ public class SkinManager : MonoBehaviour {
             newpart.bodyPart = instance;
             newpart.spriteMesh = instance.spriteMesh;
             defSkin.skinParts.Add(newpart);
-        }
+        }*/
     }
     /// <summary>
     /// Restores the initial skin (beginning of the scene) on the character

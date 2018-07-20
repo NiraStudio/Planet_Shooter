@@ -35,6 +35,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4123068424683578}
   - component: {fileID: 114072397631973164}
+  - component: {fileID: 114224039503785314}
   m_Layer: 0
   m_Name: TestGun
   m_TagString: Untagged
@@ -65,7 +66,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1776903609485838}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.577, y: 0.30474007, z: 0}
+  m_LocalPosition: {x: 8.304466, y: 1.4078448, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children:
   - {fileID: 4675835424255542}
@@ -112,6 +113,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bullet: {fileID: 1794294796839692, guid: b34907cc0bc23a8428b236afdfd5b9a7, type: 2}
   shootPos: {fileID: 4675835424255542}
+--- !u!114 &114224039503785314
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1776903609485838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcc213b486415254bad36c30bcbefd9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Manager: 0
+  PlayOnStart: 
+  sounds:
+  - ClipId: Shot
+    Clip: {fileID: 8300000, guid: 7b63790921df8654fbb73a7011a09f8d, type: 3}
+    loop: 0
+    PlayOnAwake: 0
+    Volume: 60
+    Pitch: 1
+    Sound3D: 0
+    Sound3DRange: 0
+  - ClipId: Empty
+    Clip: {fileID: 8300000, guid: c6267b11348bdd444b8ca716fe00b5c2, type: 3}
+    loop: 0
+    PlayOnAwake: 0
+    Volume: 60
+    Pitch: 1
+    Sound3D: 0
+    Sound3DRange: 0
 --- !u!212 &212808212102294788
 SpriteRenderer:
   m_ObjectHideFlags: 1

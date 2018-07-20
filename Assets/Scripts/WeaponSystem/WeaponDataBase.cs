@@ -30,12 +30,12 @@ public class WeaponDataBase : ScriptableObject {
     {
         return DataBase[i];
     }
-    public void AddCharacter(WeaponData data)
+    public void AddWeapon(WeaponData data)
     {
         DataBase.Add(data);
         setDirty();
     }
-    public void RemoveCharacter(WeaponData data)
+    public void RemoveWeapon(WeaponData data)
     {
         DataBase.Remove(data);
         setDirty();
@@ -45,22 +45,43 @@ public class WeaponDataBase : ScriptableObject {
     {
         get
         {
-            int a=1;
+            int a = 0;
+
+            bool b = false;
             if (DataBase.Count > 0)
             {
-                a = DataBase[0].id;
-                for (int i = 0; i < Count; i++)
+                while (b==false)
                 {
-                    if (DataBase[i].id > a)
-                        a = DataBase[i].id;
+                    b = true;
+                    a = Random.Range(1000, 9999);
+
+                    foreach (var item in DataBase.ToArray())
+                    {
+                        if (a==item.id)
+                        {
+                            b = false;
+                            break;
+                        }
+                    }
                 }
-                a++;
+                
+                
             }
             return a;
         }
     }
+    public bool ValidID(int ID)
+    {
+        
+        foreach (var item in DataBase.ToArray())
+        {
+            if (item.id == ID)
+                return false;
+        }
+        return true;
+    }
 
-    public void RemoveCharacter(int Index)
+    public void RemoveWeapon(int Index)
     {
         DataBase.Remove(DataBase[Index]);
     }

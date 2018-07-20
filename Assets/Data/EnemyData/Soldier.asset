@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Name: Soldier
   m_EditorClassIdentifier: 
   enemyName: Soldier
-  speed: 1.5
+  speed: 3
   hitPoint: 2
   dmg: 2

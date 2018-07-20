@@ -9,12 +9,16 @@ public class Weapon : MonoBehaviour {
     protected GameObject Bullet;
     [SerializeField]
     protected Transform shootPos;
-
+    protected SFX sfx;
+    protected PowerUpManager PUM;
     public float Damage
     {
         get
         {
-            return _damage;
+            float multi=1;
+            if (PUM != null)
+                multi += (PUM.IsActive(PowerUpType.DoubleAttack) ? 1 : 0);
+            return _damage*multi;
         }
         set
         {
@@ -71,7 +75,9 @@ public class Weapon : MonoBehaviour {
     protected CharacterHolder CH;
 	// Use this for initialization
 	void Start () {
+        PUM = PowerUpManager.Instance;
         _ammo = _maxAmmo;
+        sfx = GetComponent<SFX>();
 	}
 
     protected virtual void Update()
@@ -80,10 +86,15 @@ public class Weapon : MonoBehaviour {
             return;
         if (GamePlayManager.Instance.gamePlayState != GamePlayState.Play)
             return;
-        if (Input.GetKeyDown(KeyCode.W))
-            OnTouchBegin();
-        if(Input.GetKey(KeyCode.W))
-            OnTouchStationary();
+
+        if (Application.isEditor)
+        {
+            if (Input.GetMouseButtonDown(0))
+                OnTouchBegin();
+            if (Input.GetMouseButton(0))
+                OnTouchStationary();
+
+        }
 
         #region MobileController
 #if UNITY_ANDROID || UNITY_IOS

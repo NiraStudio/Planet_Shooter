@@ -7,11 +7,10 @@ public class GamePlayManager : MainBehavior {
 
     public GamePlayState gamePlayState;
     GamePlayUI GPUI;
-    GameManager gm;
+    protected GameManager gm;
     void Awake()
     {
         Instance = this;
-        gm = GameManager.Instance;
     }
     // Use this for initialization
     public virtual void Start()

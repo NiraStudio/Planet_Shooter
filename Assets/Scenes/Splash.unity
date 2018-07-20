@@ -123,6 +123,8 @@ GameObject:
   - component: {fileID: 1518486192}
   - component: {fileID: 1518486191}
   - component: {fileID: 1518486193}
+  - component: {fileID: 1518486194}
+  - component: {fileID: 1518486195}
   m_Layer: 0
   m_Name: _GameManager_
   m_TagString: Untagged
@@ -142,6 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponDB: {fileID: 11400000, guid: 753368d9c83696646ada64d7c33681db, type: 2}
+  CurrentLevel: {fileID: 0}
   _currencyData:
     Coin:
       currentCryptoKey: 0
@@ -186,6 +189,38 @@ MonoBehaviour:
   LanguageCode: 0
   ENFont: {fileID: 11400000, guid: d64e85ef655fb8341b1a6db1ee4c1f38, type: 2}
   FAFont: {fileID: 0}
+--- !u!114 &1518486194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1518486190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f63544704ca02443a1908149a0305e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serverAddres: http://localhost:3000/
+--- !u!114 &1518486195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1518486190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd4ae52502d60b54e892a4e589b61ef8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentUnlockLevel: 3
+  Data:
+  - level: 2
+    items:
+    - type: 0
+      id: 1
+  - level: 0
+    items: []
+  ms: '[{"Level":1,"itemsToUnlock":[]},{"Level":2,"itemsToUnlock":[]},{"Level":4,"itemsToUnlock":[]},{"Level":2,"itemsToUnlock":[{"type":0,"id":2},{"type":0,"id":1}]},{"Level":6,"itemsToUnlock":[]}]'
 --- !u!1 &1982985372
 GameObject:
   m_ObjectHideFlags: 0

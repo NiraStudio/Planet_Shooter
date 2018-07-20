@@ -15,29 +15,36 @@ public class GamePlayUI : MonoBehaviour {
 
 
 
-    public LocalizedDynamicText WaveCounter,CoinCounter;
+    public LocalizedDynamicText WaveCounter,CoinCounter,ScoreText;
     public Slider AmmoBar, HpBar;
+    
     [SerializeField]
     Animator coinShockAnimator;
 
-    GamePlayManager GPM;
+    LevelModeGameManager LM;
     CharacterHolder CH;
     Weapon weapon;
     string PersianText, EnglishText;
 
-
+    bool ready;
 	// Use this for initialization
 	IEnumerator Start () {
-        GPM = GamePlayManager.Instance;
         CH = CharacterHolder.Instance;
         yield return new WaitUntil(() => CH.weapon != null);
         weapon = CH.weapon;
         AmmoBar.maxValue = weapon.MaxAmmo;
         HpBar.maxValue = CH.HP;
+        LM = LevelModeGameManager.instance;
+        ready = true;
 	}
 	
 	// Update is called once per frame
 	void LateUpdate () {
+        if (!ready)
+            return;
+
+        ScoreText.text = LM.Score.ToString() ;
+
         AmmoBar.maxValue = weapon.MaxAmmo;
         HpBar.maxValue = CH.HP;
 

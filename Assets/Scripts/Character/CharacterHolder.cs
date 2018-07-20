@@ -13,12 +13,25 @@ public class CharacterHolder : MainBehavior,Ihitable {
     public Transform GunPose;
 
 
+    public float Angle
+    {
+        get
+        {
+            var dir = CenterSpace.position - transform.position;
+            var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            return angle+180;
+        }
+    }
     public float speed, ammo,damage;
     public float HP;
     [HideInInspector]
     public float _hp;
     [HideInInspector]
     public Weapon weapon;
+
+
+
+
 
     float regenerateSpeed;
     bool right=true;
@@ -29,12 +42,16 @@ public class CharacterHolder : MainBehavior,Ihitable {
     WeaponData weaponData;
     GameManager GM;
 
+     Transform CenterSpace;
     public GamePlayManager GPM;
+    PowerUpManager PUM;
 	// Use this for initialization
 	void Start () {
         rg = GetComponent<Rigidbody2D>();
+        CenterSpace = GameObject.FindWithTag("Ground").transform;
         GM = GameManager.Instance;
         GPM = GamePlayManager.Instance;
+        PUM = PowerUpManager.Instance;
         anim = transform.GetChild(0).GetComponent<Animator>();
         Initialize();
 
@@ -50,7 +67,7 @@ public class CharacterHolder : MainBehavior,Ihitable {
         }
 
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetMouseButtonDown(1))
             ChangeDirection();
 
 
@@ -66,13 +83,18 @@ public class CharacterHolder : MainBehavior,Ihitable {
         else if (direction == -1 && right)
             Flip();
 
+
+        var dir = CenterSpace.transform.position - transform.position;
+        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+
         anim.SetBool("Move", direction == 0 ? false:true);
     }
 
     public void Initialize()
     {
        // InitializeData();
-        InitializeGun();
+        InitializedWeapon();
         InitializeSkin();
 
         weapon.Damage = damage;
@@ -80,12 +102,14 @@ public class CharacterHolder : MainBehavior,Ihitable {
         weapon.RegenerateSpeed = regenerateSpeed;
     }
 
+
+
     public void InitializeData()
     {
 
     }
 
-    public void InitializeGun()
+    public void InitializedWeapon()
     {
         weaponData = GM.GetCurrentWeapon();
         GameObject g= Instantiate(weaponData.prefab, GunPose.position, Quaternion.identity);
@@ -166,9 +190,22 @@ public class CharacterHolder : MainBehavior,Ihitable {
 
     public void OnHit(float dmg)
     {
+
+        if (PUM.IsActive(PowerUpType.Bomb))
+        {
+            //make bomb
+            return;
+        }
+
+        if (PUM.IsActive(PowerUpType.Shield))
+            return;
+
         _hp -= dmg;
         if (_hp > 0)
+        {
+            ComboManager.Instance.RemoveCombo();
             GetComponent<CharacterHitScript>().Hited();
+        }
         else
             OnDie();
     }

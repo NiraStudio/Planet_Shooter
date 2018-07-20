@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: TestGun
   id: 1
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 28b41fef228d6814f90e541deaf9f262, type: 3}
   type: 0
   quality: 0
   prefab: {fileID: 1776903609485838, guid: 4ae906dbbfda63c46866fa6cd37ced40, type: 2}
@@ -22,7 +22,7 @@ MonoBehaviour:
     valueType: 0
     value:
       currentCryptoKey: 230887
-      hiddenValue: e7850340
+      hiddenValue: e785833f
       fakeValue: 0
       inited: 1
   - type: 3

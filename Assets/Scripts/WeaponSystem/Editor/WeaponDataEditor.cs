@@ -9,15 +9,16 @@ public class WeaponDataEditor : EditorWindow{
     public const string FILE_NAME = "WeaponDataBase.asset";
     public const string FULL_PATH = @"Assets/" + FOLDER_NAME + "/" + FILE_NAME;
 
-    public static Vector2 WindowSize= new Vector2(1200, 500);
+    public static Vector2 WindowSize= new Vector2(800, 500);
     public static Vector2 CreateAndEditButtonSize= new Vector2(100, 250);
     public static Vector2 IconButtonSize = new Vector2(100, 100);
+
 
     static Vector2 EditScrollPos,AttributeScroll;
     WeaponDataBase dataBase;
     WeaponData temp, EditTemp;
     Texture2D tempIcon,EditTexture;
-    bool create;
+    bool create=true,autoId=true;
     int SelectedCharacter=-1;
     [MenuItem("AlphaTool/WeaponSystem")]
     public static void InIt()
@@ -108,8 +109,19 @@ public class WeaponDataEditor : EditorWindow{
         GUILayout.BeginVertical();
         GUILayout.Label("Weapon Name Code:");
         temp.weaponName = GUILayout.TextField(temp.weaponName, GUILayout.Width(100));
-        GUILayout.Label("ID:");
-        temp.id = EditorGUILayout.IntField(temp.id);
+
+        GUILayout.BeginHorizontal();
+
+        autoId = GUILayout.Toggle(autoId,"Auto ID Generate");
+
+        if (!autoId)
+        {
+            GUILayout.Label("ID:");
+            temp.id = EditorGUILayout.IntField(temp.id,GUILayout.Width(100));
+        }
+        GUILayout.EndHorizontal();
+
+
         GUILayout.Label("Weapon Prefab:");
         temp.prefab = EditorGUILayout.ObjectField(temp.prefab, typeof(GameObject), false) as GameObject;
 
@@ -150,7 +162,7 @@ public class WeaponDataEditor : EditorWindow{
             else if (temp.attributes[i].valueType == AttributeValueType.Percent)
                 temp.attributes[i].value = EditorGUILayout.Slider(temp.attributes[i].value, 1, 6);
 
-            if (GUILayout.Button("X", GUILayout.Width(15), GUILayout.Height(15)))
+            if (GUILayout.Button("X", GUILayout.Width(20), GUILayout.Height(20)))
             {
                 temp.attributes.Remove(temp.attributes[i]);
             }
@@ -170,36 +182,7 @@ public class WeaponDataEditor : EditorWindow{
 
         if (GUILayout.Button("Create", GUILayout.Height(100)))
         {
-            #region AddCharacter And Clean Temp
-            WeaponData a = ScriptableObject.CreateInstance<WeaponData>();
-            a.weaponName = temp.weaponName;
-            a.id = temp.id;
-            a.quality = temp.quality;
-            a.type = temp.type;
-            a.prefab = temp.prefab;
-            a.attributes = temp.attributes;
-
-            string path = @"Assets/Data/WeaponData/";
-            if (!AssetDatabase.IsValidFolder(@"Assets/Data"))
-                AssetDatabase.CreateFolder("Assets", "Data");
-
-            if (!AssetDatabase.IsValidFolder(@"Assets/Data/" + "WeaponData"))
-                AssetDatabase.CreateFolder(@"Assets/Data", "WeaponData");
-            string b;
-            if (a.weaponName != null)
-                b = temp.weaponName;
-            else
-                b = "New Weapon data";
-            string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath(path + b + ".asset");
-
-            AssetDatabase.CreateAsset(a, assetPathAndName);
-
-            AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();
-            dataBase.AddCharacter(a);
-            temp = CreateInstance<WeaponData>();
-            EditorUtility.SetDirty(temp);
-            #endregion
+            CreateData();
         }
 
         GUILayout.EndVertical();
@@ -317,22 +300,26 @@ public class WeaponDataEditor : EditorWindow{
 
         #region Weapon Choose
 
-        EditScrollPos = GUILayout.BeginScrollView(EditScrollPos, "Box");
+        EditScrollPos = GUILayout.BeginScrollView(EditScrollPos);
 
         for (int i = 0; i < dataBase.Count; i++)
         {
             GUILayout.BeginVertical("Box");
             GUILayout.BeginHorizontal();
-            if (GUILayout.Button(dataBase.GiveByIndex(i).icon.texture, GUILayout.Width(IconButtonSize.x), GUILayout.Height(IconButtonSize.y)))
+            if (dataBase.GiveByIndex(i).icon != null)
+                EditTexture = dataBase.GiveByIndex(i).icon.texture;
+
+
+            if (GUILayout.Button(EditTexture, GUILayout.Width(IconButtonSize.x), GUILayout.Height(IconButtonSize.y)))
             {
                 EditTemp = dataBase.GiveByIndex(i);
             }
-            if (GUILayout.Button("X", GUILayout.Width(15), GUILayout.Height(15)))
+            if (GUILayout.Button("X", GUILayout.Width(20), GUILayout.Height(20)))
             {
                 if (EditorUtility.DisplayDialog("Delete Weapon", "Are you sure you want to delete " + dataBase.GiveByIndex(i).weaponName + "?", "Yes", "No"))
                 {
                     AssetDatabase.DeleteAsset(@"Assets/Data/WeaponData/" + dataBase.GiveByIndex(i).name + ".asset");
-                    dataBase.RemoveCharacter(i);
+                    dataBase.RemoveWeapon(i);
                     return;
 
                 }
@@ -708,4 +695,49 @@ public class WeaponDataEditor : EditorWindow{
          dataBase.setDirty();
          EditTemp.setDirty();
      }*/
+
+
+    void CreateData()
+    {
+
+        if (autoId)
+            temp.id = dataBase.IDGiver;
+
+        if (!dataBase.ValidID(temp.id))
+        {
+            EditorUtility.DisplayDialog("UnValid ID", "ID is UnValid ","OK");
+            return;
+        }
+       
+
+            WeaponData a = ScriptableObject.CreateInstance<WeaponData>();
+            a.id = temp.id;
+            a.weaponName = temp.weaponName;
+            a.quality = temp.quality;
+            a.type = temp.type;
+            a.prefab = temp.prefab;
+            a.attributes = temp.attributes;
+
+            string path = @"Assets/Data/WeaponData/";
+            if (!AssetDatabase.IsValidFolder(@"Assets/Data"))
+                AssetDatabase.CreateFolder("Assets", "Data");
+
+            if (!AssetDatabase.IsValidFolder(@"Assets/Data/" + "WeaponData"))
+                AssetDatabase.CreateFolder(@"Assets/Data", "WeaponData");
+            string b;
+            if (a.weaponName != null)
+                b = temp.weaponName;
+            else
+                b = "New Weapon data";
+            string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath(path + b + ".asset");
+
+            AssetDatabase.CreateAsset(a, assetPathAndName);
+
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+            dataBase.AddWeapon(a);
+            temp = CreateInstance<WeaponData>();
+            EditorUtility.SetDirty(temp);
+        
+    }
 }

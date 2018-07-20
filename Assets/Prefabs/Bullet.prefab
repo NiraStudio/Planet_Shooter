@@ -39,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1794294796839692}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -28.31, y: -9.6, z: 0}
+  m_LocalPosition: {x: -0.23153251, y: -8.10828, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -78,7 +78,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.044221655, y: -0.016328089}
-  m_Size: {x: 0.39, y: 0.74}
+  m_Size: {x: 0.39, y: 1.03}
   m_Direction: 0
 --- !u!96 &96804124435027120
 TrailRenderer:
@@ -191,12 +191,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93e2f8b04ea622542a5cb6acfefc1d69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 12
+  speed: 10
   DetectionLayer:
     serializedVersion: 2
     m_Bits: 17408
-  OverLapBoxSize: {x: 0.58, y: 0.68}
-  lifeTime: 2
+  OverLapBoxSize: {x: 0.58, y: 0.97}
+  lifeTime: 1.5
   daze: 0
   dazeTime: 0
 --- !u!114 &114665599046831828

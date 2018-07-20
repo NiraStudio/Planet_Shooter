@@ -29,11 +29,15 @@ public class LevelModeGameManager : GamePlayManager {
         get { return levelData.LevelMulti; }
     }
     GamePlayManager GPM;
-    float t;
+    float t,timeSpend;
+    public float Score;
     // Use this for initialization
     public override void Start()
     {
+        
         instance = this;
+        gm = GameManager.Instance;
+        levelData = gm.CurrentLevel;
         InitializeData();
         base.Start();
     }
@@ -42,6 +46,7 @@ public class LevelModeGameManager : GamePlayManager {
     void Update () {
         if (gamePlayState != GamePlayState.Play)
             return;
+        timeSpend += Time.deltaTime;
 
         ChechForNextEnemy();
 
@@ -86,9 +91,8 @@ public class LevelModeGameManager : GamePlayManager {
         foreach (var item in levelData.enemies.ToArray())
         {
             p = new EnemyPoint();
-            t += item.Time;
             g = Instantiate(spawnPoint, item.SpawnPos, Quaternion.identity);g.GetComponent<EnemySpawnPoint>().Enemy = item.Enemy;
-            p.time = t;
+            p.time = item.Time ;
             p.point = g;
             g.GetComponent<EnemySpawnPoint>().direction = (int)item.dir;
             enemyPoints.Add(p);
@@ -105,13 +109,19 @@ public class LevelModeGameManager : GamePlayManager {
             GPM = gameObject.AddComponent<GamePlayManager>();
 
     }
+    public void AddScore(float score)
+    {
+        Score += score;
+    }
 
     public override void OnGameWon()
     {
+        print(timeSpend);
         LoadScene("Main_Menu");
     }
     public override void OnGameLost()
     {
+        print(timeSpend);
         LoadScene("Main_Menu");
     }
 }

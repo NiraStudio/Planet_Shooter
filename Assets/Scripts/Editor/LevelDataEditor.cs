@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEditorInternal;
-using System;
 
 [CustomEditor(typeof(LevelData))]
 public class LevelDataEditor : Editor {
@@ -15,6 +14,7 @@ public class LevelDataEditor : Editor {
     SerializedObject o;
     int addAmount=0;
 
+    bool makeRandomLevel;
     private void OnEnable()
     {
         //Create the list
@@ -33,6 +33,7 @@ public class LevelDataEditor : Editor {
         EnemyList.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) => {
             var element = EnemyList.serializedProperty.GetArrayElementAtIndex(index);
             rect.y += 2;
+            
             EditorGUI.PropertyField(
                 new Rect(rect.x, rect.y, rect.width / 5, EditorGUIUtility.singleLineHeight),
                 element.FindPropertyRelative("Enemy"),
@@ -84,6 +85,9 @@ public class LevelDataEditor : Editor {
     {
         d = (LevelData)target;
 
+
+        GUILayout.BeginVertical();
+
         GUILayout.Label("Level Name");
         d.LevelName = GUILayout.TextField(d.LevelName);
 
@@ -103,6 +107,8 @@ public class LevelDataEditor : Editor {
             }
             addAmount = 0;
         }
+
+        GUILayout.EndVertical();
 
         SerializedProperty p = serializedObject.FindProperty("winRewards");
 

@@ -5,7 +5,8 @@ using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(GroundLooker))]
-public class Enemy : MainBehavior,Ihitable {
+public class Enemy : MainBehavior, Ihitable
+{
 
 
     public EnemyData Data;
@@ -21,6 +22,15 @@ public class Enemy : MainBehavior,Ihitable {
         }
         set { direction = value; }
     }
+    public float Angle
+    {
+        get
+        {
+            var dir = CenterSpace.position - transform.position;
+            var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            return angle + 180;
+        }
+    }
 
     protected string enemyName;
     protected float speed;
@@ -29,28 +39,34 @@ public class Enemy : MainBehavior,Ihitable {
     protected Rigidbody2D rg;
     protected Collider2D characterCollider;
     protected Animator anim;
-    protected int direction=0;
+    protected int direction = 0;
     protected bool ground;
-    protected float dazedTime,stopTime;
+    protected float dazedTime, stopTime;
 
+    Transform CenterSpace;
     int MoveAllow;
     GamePlayManager GPM;
-	// Use this for initialization
-	public virtual void Start () {
+    CharacterHolder CH;
+    // Use this for initialization
+    public virtual void Start()
+    {
         GPM = GamePlayManager.Instance;
+        CH = CharacterHolder.Instance;
+        CenterSpace = GameObject.FindWithTag("Ground").transform;
+
         rg = GetComponent<Rigidbody2D>();
         CameraController.Instance.AddTarget(gameObject);
         anim = GetComponent<Animator>();
         RenewState();
-       
 
         HpBar.gameObject.SetActive(false);
 
         OnStart();
-	}
+    }
 
     // Update is called once per frame
-    public virtual void Update () {
+    public virtual void Update()
+    {
 
         if (GPM.gamePlayState != GamePlayState.Play)
         {
@@ -92,7 +108,7 @@ public class Enemy : MainBehavior,Ihitable {
         HpBar.value = hitPoint;
 
         OnUpdate();
-	}
+    }
 
 
     public virtual void RenewState()
@@ -104,12 +120,18 @@ public class Enemy : MainBehavior,Ihitable {
 
         HpBar.maxValue = hitPoint;
     }
-    public virtual void OnCharacterEnter() {
+    public virtual void OnCharacterEnter()
+    {
         characterCollider.GetComponent<Ihitable>().OnHit(dmg);
     }
     public virtual void OnUpdate() { }
     public virtual void OnStart() { }
 
+    public void Turn()
+    {
+
+        direction *= -1;
+    }
     public void Stun(float time)
     {
         dazedTime = time;
@@ -124,7 +146,7 @@ public class Enemy : MainBehavior,Ihitable {
             HpBar.gameObject.SetActive(true);
 
         hitPoint -= dmg;
-        if(hitPoint<=0)
+        if (hitPoint <= 0)
         {
             hitPoint = 0;
             OnDie();
@@ -147,7 +169,7 @@ public class Enemy : MainBehavior,Ihitable {
         right = !right;
     }
 
-    void OnDrawGizmosSelected()
+    protected virtual void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.black;
         Vector2 tt = transform.position + (transform.up * -1 * GroundSizeDetection);

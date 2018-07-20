@@ -12,64 +12,7 @@ MonoBehaviour:
   m_Name: New LevelData
   m_EditorClassIdentifier: 
   LevelName: 
-  LevelMulti: 1
-  enemies:
-  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
-    Time: 1
-    SpawnPos: {x: 4.7953577, y: 3.710905}
-    dir: -1
-  - Enemy: {fileID: 1500832598206872, guid: 3c3584f196e14764499e68a8d5629c0f, type: 2}
-    Time: 0.5
-    SpawnPos: {x: -4.44, y: -8.21}
-    dir: -1
-  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
-    Time: 1
-    SpawnPos: {x: -6.2, y: 1}
-    dir: -1
-  - Enemy: {fileID: 1500832598206872, guid: 3c3584f196e14764499e68a8d5629c0f, type: 2}
-    Time: 1
-    SpawnPos: {x: 5.63, y: -7.51}
-    dir: -1
-  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
-    Time: 3
-    SpawnPos: {x: 1.6290855, y: 1.9052448}
-    dir: -1
-  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
-    Time: 1
-    SpawnPos: {x: 6.4, y: -3.91}
-    dir: -1
-  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
-    Time: 0.3
-    SpawnPos: {x: -6.61, y: -3.97}
-    dir: 1
-  - Enemy: {fileID: 1500832598206872, guid: 3c3584f196e14764499e68a8d5629c0f, type: 2}
-    Time: 0.3
-    SpawnPos: {x: -0.17, y: 4.19}
-    dir: 1
-  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
-    Time: 0.3
-    SpawnPos: {x: -0.2, y: -10}
-    dir: 1
-  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
-    Time: 0.3
-    SpawnPos: {x: 5, y: 1.41}
-    dir: 1
-  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
-    Time: 0.3
-    SpawnPos: {x: -4.76, y: -8.25}
-    dir: 1
-  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
-    Time: 0.3
-    SpawnPos: {x: 5.31, y: -8.31}
-    dir: 1
-  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
-    Time: 0.3
-    SpawnPos: {x: -5.21, y: 2.66}
-    dir: 1
-  winRewards:
-  - icon: {fileID: 0}
-    type: 0
-    amount: 50
-    weaponID: 0
-    skinID: 0
+  LevelMulti: 0
+  enemies: []
+  winRewards: []
   lostRewards: []

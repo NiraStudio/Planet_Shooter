@@ -31,6 +31,8 @@ public class SoldierLevelMode : LevelModeEnemy {
     {
         b = Instantiate(Bullet, ShootPos.position, Quaternion.identity);
         b.GetComponent<Bullet>().Release(direction, dmg);
+        if (Random.Range(0, 100) <= 30)
+            Turn();
     }
     public void WaitTimeReset()
     {

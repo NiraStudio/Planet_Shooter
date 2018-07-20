@@ -8,7 +8,7 @@ using System.IO;
 public class GameManager : MainBehavior
 {
     public WeaponDataBase weaponDB;
-
+    public LevelData CurrentLevel;
     #region Singleton
     public static GameManager Instance;
     void Awake()
@@ -37,7 +37,7 @@ public class GameManager : MainBehavior
     {
         LoadPlayerData();
         LoadCurrencyData();
-        LoadScene("Level_Mode");
+        LoadScene("Main_Menu");
     }
 
     void Update()

@@ -10,7 +10,7 @@ public class AmmoItem : PickableItem {
     private IEnumerator Start()
     {
         yield return new WaitForSeconds(5);
-        Die();
+       // Die();
     }
 
     // Use this for initialization
@@ -22,6 +22,7 @@ public class AmmoItem : PickableItem {
         vfx.SetActive(true);
         TextDeatil.SetActive(true);
         CharacterHolder.Instance.GetEnergy(AmmoAmount);
+        GetComponent<SFX>().PlaySound("Sound 1");
         Die();
     }
     public void ChangeAmmo(float amount)
