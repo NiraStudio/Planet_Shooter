@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Name: New LevelData
   m_EditorClassIdentifier: 
   LevelName: Hard Design
-  LevelMulti: 1
+  LevelHPMulti: 1
+  LevelDmgMulti: 1
   enemies:
   - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
     Time: 0
