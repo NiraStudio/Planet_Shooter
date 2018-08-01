@@ -1,0 +1,178 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2590212fed5c25c4e8a8bd07e19c4305, type: 3}
+  m_Name: Level 3
+  m_EditorClassIdentifier: 
+  LevelName: Level 3
+  LevelMulti: 1.5
+  enemies:
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 1
+    SpawnPos: {x: 6.921872, y: 2.124181}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 1
+    SpawnPos: {x: -6.3368087, y: 2.538493}
+    dir: 1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 3
+    SpawnPos: {x: 8.453545, y: -6.430764}
+    dir: 1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 3
+    SpawnPos: {x: -8.334601, y: -6.1242533}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 3
+    SpawnPos: {x: -0.1582336, y: 5.3259296}
+    dir: -1
+  - Enemy: {fileID: 1038903399908106, guid: 84e37131259f42940b47cfef605e9ad6, type: 2}
+    Time: 4
+    SpawnPos: {x: 8.94993, y: -3.545079}
+    dir: 1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 6
+    SpawnPos: {x: 0.022623703, y: 5.329568}
+    dir: 1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 6
+    SpawnPos: {x: 8.9163885, y: -2.7398593}
+    dir: -1
+  - Enemy: {fileID: 1038903399908106, guid: 84e37131259f42940b47cfef605e9ad6, type: 2}
+    Time: 6
+    SpawnPos: {x: 0.16169502, y: -12.34985}
+    dir: 1
+  - Enemy: {fileID: 1038903399908106, guid: 84e37131259f42940b47cfef605e9ad6, type: 2}
+    Time: 6
+    SpawnPos: {x: -8.727701, y: -3.3083794}
+    dir: 1
+  - Enemy: {fileID: 1038903399908106, guid: 84e37131259f42940b47cfef605e9ad6, type: 2}
+    Time: 8
+    SpawnPos: {x: 0.7144388, y: 5.309311}
+    dir: -1
+  - Enemy: {fileID: 1038903399908106, guid: 84e37131259f42940b47cfef605e9ad6, type: 2}
+    Time: 8
+    SpawnPos: {x: 7.286115, y: -8.672265}
+    dir: 1
+  - Enemy: {fileID: 1038903399908106, guid: 84e37131259f42940b47cfef605e9ad6, type: 2}
+    Time: 8
+    SpawnPos: {x: -7.1131444, y: -8.606253}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 14
+    SpawnPos: {x: -8.706933, y: -2.8718033}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 14
+    SpawnPos: {x: 8.942719, y: -3.151311}
+    dir: 1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 16
+    SpawnPos: {x: 6.542368, y: 2.553847}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 16
+    SpawnPos: {x: -6.0342755, y: 2.845587}
+    dir: 1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 18
+    SpawnPos: {x: 4.069578, y: -11.413629}
+    dir: -1
+  - Enemy: {fileID: 1038903399908106, guid: 84e37131259f42940b47cfef605e9ad6, type: 2}
+    Time: 14
+    SpawnPos: {x: -4.8355446, y: -10.837154}
+    dir: 1
+  - Enemy: {fileID: 1038903399908106, guid: 84e37131259f42940b47cfef605e9ad6, type: 2}
+    Time: 15
+    SpawnPos: {x: -8.702828, y: -2.81742}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 18
+    SpawnPos: {x: -7.0731, y: -8.66254}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 21
+    SpawnPos: {x: 7.9279613, y: 0.6161463}
+    dir: 1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 21
+    SpawnPos: {x: -8.692601, y: -2.6977072}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 24
+    SpawnPos: {x: -0.33461642, y: -12.338812}
+    dir: 1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 24
+    SpawnPos: {x: -5.009322, y: 3.6968124}
+    dir: -1
+  - Enemy: {fileID: 1038903399908106, guid: 84e37131259f42940b47cfef605e9ad6, type: 2}
+    Time: 23
+    SpawnPos: {x: -8.691688, y: -4.3321357}
+    dir: 1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 26
+    SpawnPos: {x: 4.0728006, y: 4.3920135}
+    dir: 1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 26
+    SpawnPos: {x: 8.901502, y: -2.5852838}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 26
+    SpawnPos: {x: -8.718793, y: -3.0650005}
+    dir: -1
+  - Enemy: {fileID: 1038903399908106, guid: 84e37131259f42940b47cfef605e9ad6, type: 2}
+    Time: 27
+    SpawnPos: {x: -4.597695, y: -10.992193}
+    dir: 1
+  - Enemy: {fileID: 1038903399908106, guid: 84e37131259f42940b47cfef605e9ad6, type: 2}
+    Time: 27
+    SpawnPos: {x: 8.931361, y: -2.9362528}
+    dir: -1
+  - Enemy: {fileID: 1038903399908106, guid: 84e37131259f42940b47cfef605e9ad6, type: 2}
+    Time: 27
+    SpawnPos: {x: -4.1664433, y: 4.2267714}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 30
+    SpawnPos: {x: -0.22974883, y: -12.34347}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 30
+    SpawnPos: {x: -0.22622715, y: 5.3236036}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 33
+    SpawnPos: {x: 8.239319, y: -6.9827185}
+    dir: 1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 33
+    SpawnPos: {x: -6.8724146, y: -8.931392}
+    dir: 1
+  - Enemy: {fileID: 1038903399908106, guid: 84e37131259f42940b47cfef605e9ad6, type: 2}
+    Time: 34
+    SpawnPos: {x: -8.716917, y: -3.029231}
+    dir: -1
+  - Enemy: {fileID: 1038903399908106, guid: 84e37131259f42940b47cfef605e9ad6, type: 2}
+    Time: 34
+    SpawnPos: {x: -5.7939386, y: -10.089446}
+    dir: -1
+  - Enemy: {fileID: 1038903399908106, guid: 84e37131259f42940b47cfef605e9ad6, type: 2}
+    Time: 34
+    SpawnPos: {x: 4.7785425, y: -11.0166855}
+    dir: 1
+  - Enemy: {fileID: 1038903399908106, guid: 84e37131259f42940b47cfef605e9ad6, type: 2}
+    Time: 34
+    SpawnPos: {x: 8.26544, y: -6.9209237}
+    dir: -1
+  winRewards: []
+  lostRewards: []

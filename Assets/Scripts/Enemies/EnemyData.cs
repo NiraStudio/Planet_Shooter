@@ -10,4 +10,5 @@ public class EnemyData : ScriptableObject {
     public float speed;
     public float hitPoint;
     public float dmg;
+    public int CoindCapacity;
 }

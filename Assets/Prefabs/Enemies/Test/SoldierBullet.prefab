@@ -91,6 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ground: {fileID: 0}
+  DChanger: 0
 --- !u!114 &114655547632437702
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -140,8 +141,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 248155861
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 432f3a297aafa0441bdde4d61cffaaa9, type: 3}
   m_Color: {r: 1, g: 0.8970643, b: 0, a: 1}

@@ -11,7 +11,7 @@ public class EnemySpawner : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         ground = GameObject.FindWithTag("Ground").transform;
-        GPM = GamePlayManager.Instance;
+        GPM = GamePlayManager.GPM;
         StartCoroutine(spawn());
 
     }

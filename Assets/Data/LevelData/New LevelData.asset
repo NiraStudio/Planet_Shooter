@@ -11,8 +11,215 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2590212fed5c25c4e8a8bd07e19c4305, type: 3}
   m_Name: New LevelData
   m_EditorClassIdentifier: 
-  LevelName: 
-  LevelMulti: 0
-  enemies: []
+  LevelName: Hard Design
+  LevelMulti: 1
+  enemies:
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 0
+    SpawnPos: {x: 7.6140356, y: 1.2813325}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 0.5
+    SpawnPos: {x: 8.750721, y: -1.9568095}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 1
+    SpawnPos: {x: -4.314986, y: 4.505342}
+    dir: 1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 1.2
+    SpawnPos: {x: -5.2125216, y: -10.349693}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 1.9
+    SpawnPos: {x: 6.815201, y: -8.840155}
+    dir: 1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 2
+    SpawnPos: {x: 0.3518881, y: 5.6229935}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 2.2
+    SpawnPos: {x: 7.6835947, y: -7.5812674}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 3.2
+    SpawnPos: {x: -4.6841903, y: 4.2869306}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 3.5
+    SpawnPos: {x: 7.3571267, y: -8.110846}
+    dir: 1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 3.7
+    SpawnPos: {x: 4.1863017, y: -10.995915}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 3.9
+    SpawnPos: {x: 4.2021422, y: 4.5673776}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 4.1
+    SpawnPos: {x: 1.8639823, y: -11.851249}
+    dir: 1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 4.3
+    SpawnPos: {x: 6.382403, y: 2.9064155}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 4.4
+    SpawnPos: {x: -6.745343, y: 2.5036626}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 4.6
+    SpawnPos: {x: 5.8586183, y: 3.4098334}
+    dir: 1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 4.8
+    SpawnPos: {x: 6.078174, y: 3.2088313}
+    dir: 1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 5.4
+    SpawnPos: {x: 4.1667523, y: 4.5863957}
+    dir: 1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 5.9
+    SpawnPos: {x: 8.532085, y: -5.5228195}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 6
+    SpawnPos: {x: 1.0139062, y: 5.571663}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 6.4
+    SpawnPos: {x: -5.740178, y: 3.5127935}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 6.6
+    SpawnPos: {x: -2.0881233, y: -11.79984}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 7.32
+    SpawnPos: {x: 6.829105, y: 2.4032812}
+    dir: 1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 7.6
+    SpawnPos: {x: -8.306384, y: -0.18517256}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 8
+    SpawnPos: {x: 7.6661215, y: 1.1918383}
+    dir: 1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 8.4
+    SpawnPos: {x: 3.6220417, y: 4.853895}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 8.9
+    SpawnPos: {x: 2.3017921, y: 5.3250656}
+    dir: 1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 9.5
+    SpawnPos: {x: 4.083858, y: 4.630134}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 10.1
+    SpawnPos: {x: -4.745413, y: 4.248328}
+    dir: 1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 10.4
+    SpawnPos: {x: -7.757675, y: -7.4484067}
+    dir: 1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 10.9
+    SpawnPos: {x: -5.811627, y: 3.4511256}
+    dir: 1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 11.1
+    SpawnPos: {x: -6.0363946, y: -9.6681385}
+    dir: 1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 11.6
+    SpawnPos: {x: -8.2673645, y: -6.3399034}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 12.1
+    SpawnPos: {x: -2.9275947, y: 5.1311502}
+    dir: 1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 12.9
+    SpawnPos: {x: 7.949651, y: 0.6563494}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 13.6
+    SpawnPos: {x: 8.373587, y: -0.37651372}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 14
+    SpawnPos: {x: -0.7217501, y: 5.600486}
+    dir: 1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 15.3
+    SpawnPos: {x: 8.517162, y: -5.577182}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 15.5
+    SpawnPos: {x: 3.5248427, y: -11.3168545}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 16.1
+    SpawnPos: {x: 5.687484, y: 3.5574312}
+    dir: 1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 16.2
+    SpawnPos: {x: -2.6202126, y: 5.232753}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 16.56
+    SpawnPos: {x: 8.012154, y: 0.52510405}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 17.5
+    SpawnPos: {x: -1.236368, y: 5.5431137}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 17.65
+    SpawnPos: {x: 2.1458316, y: 5.3656054}
+    dir: 1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 18.42
+    SpawnPos: {x: 8.165052, y: 0.17785072}
+    dir: 1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 19.5
+    SpawnPos: {x: -0.93566334, y: 5.5803432}
+    dir: 1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 20
+    SpawnPos: {x: -8.454937, y: -0.6293745}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 20.2
+    SpawnPos: {x: 5.0182085, y: 4.0675817}
+    dir: 1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 20.6
+    SpawnPos: {x: 4.959011, y: 4.1080465}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 21.3
+    SpawnPos: {x: -6.477678, y: 2.8054214}
+    dir: 1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 21.9
+    SpawnPos: {x: -7.110277, y: 2.0425758}
+    dir: 1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 22.2
+    SpawnPos: {x: -0.67713434, y: 5.6040287}
+    dir: -1
+  - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
+    Time: 23.1
+    SpawnPos: {x: -2.9358478, y: -11.548249}
+    dir: -1
   winRewards: []
-  lostRewards: []

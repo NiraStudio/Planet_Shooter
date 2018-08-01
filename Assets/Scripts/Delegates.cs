@@ -8,3 +8,6 @@ public class Delegates {
 }
 
 public delegate void ResultDelegate<T>(T Code);
+
+
+

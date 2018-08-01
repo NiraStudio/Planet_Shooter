@@ -20,13 +20,12 @@ public class SkinManager : MonoBehaviour {
     }
 
     public GameObject skinHolder;   //Skin holder GameObject
-    
+
     private void OnEnable()
     {
-       // RefreshSkins();
-       // GetDefSkin();
-       // SetSkin(defSkin);
-       // LoadSkinByString("1");
+        RefreshSkins();
+        GetDefSkin();
+        SetSkin(defSkin);
     }
 
     /// <summary>
@@ -75,7 +74,7 @@ public class SkinManager : MonoBehaviour {
     /// </summary>
     private void GetDefSkin()
     {
-       /* //Init
+        //Init
         defSkin = gameObject.AddComponent<Skin>();
         defSkin.skinName = "_default";
         defSkin.skinParts = new List<SkinPart>();
@@ -88,7 +87,7 @@ public class SkinManager : MonoBehaviour {
             newpart.bodyPart = instance;
             newpart.spriteMesh = instance.spriteMesh;
             defSkin.skinParts.Add(newpart);
-        }*/
+        }
     }
     /// <summary>
     /// Restores the initial skin (beginning of the scene) on the character
@@ -128,6 +127,47 @@ public class SkinManager : MonoBehaviour {
         {
             Debug.LogError("ERROR: The skin with name " + skinName + " could not be found in " + gameObject.name);
         }
+    }
+
+    public void LoadSkinByID(int id)
+    {
+
+        //Get index of skin in list
+        int index = -2;
+
+        for (int i = 0; i < skins.Count; i++)
+        {
+            //Return the index
+            if (skins[i].ID == id)
+            {
+                index= i;
+                break;
+            }
+        }
+
+        if (index != -2)
+        {
+            //Set the skin
+            SetSkin(skins[index]);
+        }
+        else
+        {
+            Debug.LogError("ERROR: The skin with id " + id + " could not be found in " + gameObject.name);
+        }
+    }
+
+    public Skin SkinByID(int id)
+    {
+        for (int i = 0; i < skins.Count; i++)
+        {
+            //Return the index
+            if (skins[i].ID == id)
+            {
+                return skins[i];
+            }
+        }
+
+        return null;
     }
 
     /// <summary>

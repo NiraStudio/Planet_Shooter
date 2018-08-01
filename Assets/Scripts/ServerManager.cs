@@ -19,15 +19,24 @@ public class ServerManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        
 
+        #region Example
+
+        /*
+        SendData<ResultClass>("",Json Data, (result) =>
+        {
+            
+
+        });
+        */
+        #endregion
 
 
 
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 

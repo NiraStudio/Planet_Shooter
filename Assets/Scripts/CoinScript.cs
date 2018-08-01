@@ -40,7 +40,7 @@ public class CoinScript : MonoBehaviour {
 	}
     void Die()
     {
-        GamePlayUI.Instance.CoinShock();
+        LevelModeGamePlayUI.Instance.CoinShock();
         Destroy(gameObject);
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using Attributes;
 
 public class WeaponDataEditor : EditorWindow{
 

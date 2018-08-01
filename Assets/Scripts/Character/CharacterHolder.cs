@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using Attributes;
 
 public class CharacterHolder : MainBehavior,Ihitable {
     public static CharacterHolder Instance;
@@ -10,25 +10,21 @@ public class CharacterHolder : MainBehavior,Ihitable {
         Instance = this;
     }
 
-    public Transform GunPose;
+    public GameObject characterShape, characterGhost;
+    public Transform WeaponPos;
 
 
-    public float Angle
-    {
-        get
-        {
-            var dir = CenterSpace.position - transform.position;
-            var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            return angle+180;
-        }
-    }
-    public float speed, ammo,damage;
-    public float HP;
+    public float speed;
+
+    [HideInInspector]
+    public float ammo,damage,MaxHp;
     [HideInInspector]
     public float _hp;
     [HideInInspector]
     public Weapon weapon;
 
+    public SkinManager SM;
+    public Animator CharacterAnimator;
 
 
 
@@ -41,24 +37,30 @@ public class CharacterHolder : MainBehavior,Ihitable {
     Animator anim;
     WeaponData weaponData;
     GameManager GM;
-
-     Transform CenterSpace;
-    public GamePlayManager GPM;
+    GameObject detailText;
+    Transform CenterSpace;
+    GamePlayManager GPM;
     PowerUpManager PUM;
+
+    float j;
 	// Use this for initialization
-	void Start () {
+	protected virtual void  Start () {
         rg = GetComponent<Rigidbody2D>();
         CenterSpace = GameObject.FindWithTag("Ground").transform;
         GM = GameManager.Instance;
-        GPM = GamePlayManager.Instance;
+        GPM = GamePlayManager.GPM;
         PUM = PowerUpManager.Instance;
-        anim = transform.GetChild(0).GetComponent<Animator>();
+        detailText = Resources.Load<GameObject>("DetailText");
+
+        characterShape.SetActive(true);
+        characterGhost.SetActive(false);
+
         Initialize();
 
-        _hp = HP;
+        _hp = MaxHp;
 	}
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    protected virtual void Update () {
 
         if (GPM.gamePlayState != GamePlayState.Play)
         {
@@ -66,14 +68,34 @@ public class CharacterHolder : MainBehavior,Ihitable {
             return;
         }
 
+        if (Application.isEditor)
+        {
 
-        if (Input.GetMouseButtonDown(1))
-            ChangeDirection();
+            if (Input.GetMouseButtonDown(1))
+                ChangeDirection();
 
-
-
+            if (Input.GetKeyDown(KeyCode.H))
+                Jump();
+        }
         ground = Physics2D.Raycast(transform.position, transform.up * -1, .3f, GroundLayer);
-        if (ground)
+
+
+        //move Part
+
+        if (PUM.IsActive(PowerUpType.JetPack))
+        {
+            Vector2 tt=rg.velocity ;
+            if (Vector2.Distance(transform.position, CenterSpace.transform.position) < 8)
+            {
+                tt =((Vector2) transform.up * 7)+((Vector2)transform.right*speed*direction);
+            }
+            rg.velocity = tt; 
+        }
+        else if(j>0)
+        {
+            j -= Time.deltaTime;
+        }
+        else if (ground)
             rg.velocity = transform.right * direction * speed;
 
 
@@ -84,14 +106,20 @@ public class CharacterHolder : MainBehavior,Ihitable {
             Flip();
 
 
-        var dir = CenterSpace.transform.position - transform.position;
-        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
 
-        anim.SetBool("Move", direction == 0 ? false:true);
+
+        CharacterAnimator.SetBool("Move", direction == 0 ? false:true);
     }
 
-    public void Initialize()
+    public virtual void Jump()
+    {
+        j=0.3f;
+        PUM.Activate(PowerUpType.JetPack);
+       // rg.AddForce(transform.up * 750, ForceMode2D.Force);
+    }
+
+    public virtual void Initialize()
     {
        // InitializeData();
         InitializedWeapon();
@@ -104,35 +132,37 @@ public class CharacterHolder : MainBehavior,Ihitable {
 
 
 
-    public void InitializeData()
+    public virtual void InitializeData()
     {
 
     }
 
-    public void InitializedWeapon()
+    public virtual void InitializedWeapon()
     {
         weaponData = GM.GetCurrentWeapon();
-        GameObject g= Instantiate(weaponData.prefab, GunPose.position, Quaternion.identity);
+        GameObject g= Instantiate(weaponData.prefab, WeaponPos.position, Quaternion.identity);
         weapon = g.GetComponent<Weapon>();
-        g.transform.SetParent(GunPose);
+        g.transform.SetParent(WeaponPos);
         g.transform.localScale = Vector2.one;
         g.transform.localRotation = Quaternion.Euler(0,0,0);
         AttributeChanger(weaponData.attributes);
     }
 
-    public void InitializeSkin()
+    public virtual void InitializeSkin()
     {
-
+        Skin a = SM.SkinByID(GM.CurrentSkin);
+        SM.LoadSkin(a);
+        AttributeChanger(a.attributes);
     }
 
-    void AttributeChanger(List<Attribute> at)
+    public void AttributeChanger(List<Attribute> at)
     {
         foreach (var item in at)
         {
             switch (item.type)
             {
                 case AttributeType.Hp:
-                    HP += item.value;
+                    MaxHp += item.value;
                     break;
                 case AttributeType.Damage:
                     damage += item.value;
@@ -148,12 +178,12 @@ public class CharacterHolder : MainBehavior,Ihitable {
 
         }
     }
-    void AttributeChanger(Attribute at)
+    public void AttributeChanger(Attribute at)
     {
         switch (at.type)
         {
             case AttributeType.Hp:
-                HP += at.value;
+                MaxHp += at.value;
                 break;
             case AttributeType.Damage:
                 damage += at.value;
@@ -188,7 +218,7 @@ public class CharacterHolder : MainBehavior,Ihitable {
 
     }
 
-    public void OnHit(float dmg)
+    public virtual void OnHit(float dmg)
     {
 
         if (PUM.IsActive(PowerUpType.Bomb))
@@ -198,7 +228,12 @@ public class CharacterHolder : MainBehavior,Ihitable {
         }
 
         if (PUM.IsActive(PowerUpType.Shield))
+        {
+           
             return;
+        }
+
+
 
         _hp -= dmg;
         if (_hp > 0)
@@ -210,22 +245,27 @@ public class CharacterHolder : MainBehavior,Ihitable {
             OnDie();
     }
 
-    public void OnHeal(float Amount)
+    public virtual void OnHeal(float Amount)
     {
     }
 
-    public void GetEnergy(float Amount)
+    public virtual void GetEnergy(float Amount)
     {
         weapon.GetAmmo(Amount);
     }
 
-    public void OnDie()
+    public virtual void OnDie()
     {
+        characterGhost.SetActive(true);
+        characterShape.SetActive(false);
+        WeaponPos.gameObject.SetActive(false);
+        GetComponent<CircleCollider2D>().enabled = false;
+        rg.bodyType = RigidbodyType2D.Static;
         GPM.OnGameLost();
         print("Death");
     }
 
-    void Flip()
+    protected void Flip()
     {
         Vector3 t = transform.localScale;
         t.x *= -1;

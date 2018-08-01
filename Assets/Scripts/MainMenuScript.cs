@@ -18,7 +18,7 @@ public class MainMenuScript : MainBehavior {
 
     private void Update()
     {
-        damageText.text = level.LevelName;
+       // damageText.text = level.LevelName;
     }
     public void CHnage()
     {

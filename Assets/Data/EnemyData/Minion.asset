@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Name: Minion
   m_EditorClassIdentifier: 
   enemyName: Minion
-  speed: 5
+  speed: 3
   hitPoint: 1
   dmg: 1
+  CoindCapacity: 0

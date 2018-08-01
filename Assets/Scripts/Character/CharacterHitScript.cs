@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using Anima2D;
 
 public class CharacterHitScript : MainBehavior {
 
     Transform CH;
-    public SpriteRenderer[] Objects;
+    public SpriteMeshInstance[] Objects;
+    public GameObject hpUI;
 	void Start()
     {
         CH = transform.GetChild(0);
@@ -24,11 +27,14 @@ public class CharacterHitScript : MainBehavior {
             {
                 Objects[j].color = Color.clear; 
             }
+            hpUI.SetActive(false);
             yield return new WaitForSeconds(0.2f);
             for (int j = 0; j < CH.transform.childCount; j++)
             {
                 Objects[j].color = Color.white;
             }
+            hpUI.SetActive(true);
+
             yield return new WaitForSeconds(0.2f);
         }
         gameObject.layer = 9;

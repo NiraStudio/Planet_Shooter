@@ -19,7 +19,13 @@ public class GameManager : MainBehavior
     #endregion
 
 
-    
+
+    [Header("Power Up")]
+
+    public PowerUpType SlotPowerUp;
+    public PowerUpType AdSlotPowerUp;
+
+
     public int Coin
     {
         get { return _currencyData.Coin; }
@@ -92,8 +98,19 @@ public class GameManager : MainBehavior
             SavePlayerData();
         }
     }
-   
-    
+
+    public int CurrentSkin
+    {
+        get { return _playerData.CurrentSkinID; }
+        set
+        {
+            LoadPlayerData();
+            _playerData.CurrentWeaponID = value;
+            SavePlayerData();
+        }
+    }
+
+
 
     #endregion
 
@@ -183,7 +200,7 @@ public class CurrencyData
 [System.Serializable]
 public class PlayerData
 {
-    public int CurrentWeaponID;
+    public int CurrentWeaponID, CurrentSkinID;
     public List<int> WeaponIDs = new List<int>();
     public List<int> SkinID = new List<int>();
 }

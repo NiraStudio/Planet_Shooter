@@ -42,18 +42,21 @@ public class Enemy : MainBehavior, Ihitable
     protected int direction = 0;
     protected bool ground;
     protected float dazedTime, stopTime;
+    protected GameObject detailText;
 
     Transform CenterSpace;
-    int MoveAllow;
+    float MoveAllow;
     GamePlayManager GPM;
     CharacterHolder CH;
+    PowerUpManager pu;
     // Use this for initialization
     public virtual void Start()
     {
-        GPM = GamePlayManager.Instance;
+        GPM = GamePlayManager.GPM;
         CH = CharacterHolder.Instance;
         CenterSpace = GameObject.FindWithTag("Ground").transform;
-
+        detailText = Resources.Load<GameObject>("DetailText");
+        pu = PowerUpManager.Instance;
         rg = GetComponent<Rigidbody2D>();
         CameraController.Instance.AddTarget(gameObject);
         anim = GetComponent<Animator>();
@@ -82,7 +85,7 @@ public class Enemy : MainBehavior, Ihitable
         ground = Physics2D.Raycast(transform.position, transform.up * -1, GroundSizeDetection, GroundLayer);
 
         #region MoveAllow
-        MoveAllow = (stopTime > 0 ? 0 : 1) * (dazedTime > 0 ? 0 : 1);
+        MoveAllow = (stopTime > 0 ? 0 : 1) * (dazedTime > 0 ? 0 : 1)*(pu.IsActive(PowerUpType.Slow)?0.2f:1);
 
         #endregion
 
@@ -144,6 +147,10 @@ public class Enemy : MainBehavior, Ihitable
     {
         if (!HpBar.gameObject.activeInHierarchy)
             HpBar.gameObject.SetActive(true);
+
+
+        Instantiate(detailText, transform.position, transform.localRotation).GetComponent<DetailTextController>().Repaint("-"+dmg, Color.red);
+
 
         hitPoint -= dmg;
         if (hitPoint <= 0)

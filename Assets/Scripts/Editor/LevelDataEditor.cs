@@ -91,7 +91,7 @@ public class LevelDataEditor : Editor {
         GUILayout.Label("Level Name");
         d.LevelName = GUILayout.TextField(d.LevelName);
 
-        d.LevelMulti = EditorGUILayout.FloatField("Level Multi", d.LevelMulti);
+        d.LevelHPMulti = EditorGUILayout.FloatField("Level Multi", d.LevelHPMulti);
         GUILayout.Space(20);
 
         serializedObject.Update();

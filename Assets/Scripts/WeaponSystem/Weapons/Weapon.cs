@@ -82,9 +82,9 @@ public class Weapon : MonoBehaviour {
 
     protected virtual void Update()
     {
-        if (GamePlayManager.Instance == null)
+        if (GamePlayManager.GPM == null)
             return;
-        if (GamePlayManager.Instance.gamePlayState != GamePlayState.Play)
+        if (GamePlayManager.GPM.gamePlayState != GamePlayState.Play)
             return;
 
         if (Application.isEditor)

@@ -5,16 +5,19 @@ using Cinemachine;
 
 public class CameraController : MonoBehaviour {
     public static CameraController Instance;
+
     public Vector3 offSet;
     [SerializeField]
     List<GameObject> Targets = new List<GameObject>();
+
+    public Transform CharacterTransform;
 
     public float minZoom = 10f;
     public float maxZoom = 40f;
     public float zoomLimiter = 50f;
 
-    bool Character;
-
+    public bool Character;
+    Bounds boundtemp;
     CinemachineVirtualCamera cam;
     Vector3 velocity;
     void Awake()
@@ -24,26 +27,30 @@ public class CameraController : MonoBehaviour {
     void Start()
     {
         cam = GetComponent<CinemachineVirtualCamera>();
+
     }
-    void LateUpdate()
+    void Update()
     {
-        foreach (var character in Targets.ToArray())
+        if (Character)
         {
-            if (character == null)
-                Targets.Remove(character);
+
+           // if()
+
+           // transform.position = Vector3.Lerp(transform.position, CharacterTransform.position+new Vector3(0,1,-10), Time.deltaTime);
+
+
+
+            transform.localRotation = Quaternion.Lerp(transform.localRotation, CharacterTransform.localRotation, Time.deltaTime);
+            if(Mathf.Round( cam.m_Lens.OrthographicSize)!=4)
+            cam.m_Lens.OrthographicSize = Mathf.Lerp(cam.m_Lens.OrthographicSize, 4f, Time.deltaTime);
+            return;
         }
 
-        if (Targets.Count < 2)
-            return;
 
-        Move();
-        Zoom();
+        
     }
 
-    public void ZoomToCharacter()
-    {
-        minZoom = 3;
-    }
+
 
     void Move()
     {
@@ -87,14 +94,25 @@ public class CameraController : MonoBehaviour {
 
     float GetGreatSize()
     {
-        var bound = new Bounds(Targets[0].transform.position, Vector3.zero);
+        boundtemp = new Bounds(Targets[0].transform.position, Vector3.zero);
 
         foreach (var item in Targets)
         {
             if (item != null)
-                bound.Encapsulate(item.transform.position);
+                boundtemp.Encapsulate(item.transform.position);
         }
-        return bound.size.x;
+        return boundtemp.size.x;
 
+    }
+
+    public void ZoomToChatacter()
+    {
+        Character = true;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position, boundtemp.size);
     }
 }

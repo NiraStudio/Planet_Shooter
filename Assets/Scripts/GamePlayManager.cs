@@ -2,20 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class GamePlayManager : MainBehavior {
-    public static GamePlayManager Instance;
+    public static GamePlayManager GPM;
 
     public GamePlayState gamePlayState;
-    GamePlayUI GPUI;
+    LevelModeGamePlayUI GPUI;
     protected GameManager gm;
+    public List<GameObject> enemies = new List<GameObject>();
+    string path;
     void Awake()
     {
-        Instance = this;
+        GPM = this;
     }
     // Use this for initialization
     public virtual void Start()
     {
-        GPUI = GetComponent<GamePlayUI>();
+
         StartCoroutine(StartGame());
     }
 
@@ -24,7 +27,7 @@ public class GamePlayManager : MainBehavior {
 
     
 
-    IEnumerator StartGame()
+    public IEnumerator StartGame()
     {
         for (int i = 3; i > 0; i--)
         {
@@ -35,17 +38,25 @@ public class GamePlayManager : MainBehavior {
         yield return new WaitForSeconds(1);
         gamePlayState = GamePlayState.Play;
 
+
+
+
     }
 
     public virtual void OnGameLost()
     {
-        LoadScene("Main_Menu");
     }
 
     public virtual void OnGameWon()
     {
-       
     }
+
+    IEnumerator share(string path)
+    {
+        yield return new WaitForSeconds(0.52f);
+        new NativeShare().AddFile(path).SetText("I Nailed it").Share();
+    }
+
 
 }
 

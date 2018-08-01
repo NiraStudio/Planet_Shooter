@@ -81,7 +81,7 @@ public class LevelEditor : EditorWindow {
         GUILayout.Label("Level Name");
         d.LevelName = GUILayout.TextField(d.LevelName);
 
-        d.LevelMulti = EditorGUILayout.FloatField("Level Multi", d.LevelMulti);
+        d.LevelHPMulti = EditorGUILayout.FloatField("Level Multi", d.LevelHPMulti);
         GUILayout.Space(20);
 
         o.Update();
@@ -99,8 +99,8 @@ public class LevelEditor : EditorWindow {
         }
 
         #region ---- Attention ----- In case of Level Design Fails
-        /*
-        if (GUILayout.Button("Make Random Level "))
+        
+       /* if (GUILayout.Button("Make Random Level "))
         {
             makeRandomLevel = !makeRandomLevel;
         }
@@ -120,9 +120,12 @@ public class LevelEditor : EditorWindow {
                     Vector2 t = (Random.insideUnitCircle*8.84f) - new Vector2(0, -3.21f);
                     t.Normalize();
                     ebt.SpawnPos = new Vector2(0, -3.21f) + (t * 8.84f);
-                    tt += Random.Range(0f, 2f);
+                    tt += Random.Range(0f, 1f);
                     ebt.Time = tt;
-                    ebt.dir = Direction.Left;
+                    while ((int)ebt.dir==0)
+                    {
+                        ebt.dir = (Direction)Random.Range(-1, 2);
+                    }
 
                     d.enemies.Add(ebt);
                 }
@@ -136,7 +139,7 @@ public class LevelEditor : EditorWindow {
 
         EditorGUILayout.PropertyField(p, true);
         o.ApplyModifiedProperties();
-
+        d.setDirty();
         GUILayout.EndScrollView();
     }
 }

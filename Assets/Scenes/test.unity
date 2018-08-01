@@ -306,13 +306,15 @@ GameObject:
   - component: {fileID: 1352101797}
   - component: {fileID: 1352101796}
   - component: {fileID: 1352101795}
+  - component: {fileID: 1352101799}
+  - component: {fileID: 1352101798}
   m_Layer: 0
   m_Name: New Sprite (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1352101795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,8 +326,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96e6f373a4d252e4b84e15f20271c641, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  r:
+    icon: {fileID: 0}
+    type: 0
+    amount: 0
+    weaponID: 0
+    skinID: 0
   p: {fileID: 0}
   target: {fileID: 0}
+  ch: {fileID: 0}
+  id: 0
+  sm: {fileID: 0}
 --- !u!212 &1352101796
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -384,3 +395,47 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1352101798
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1352101794}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 1
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.28, y: 1.28}
+    newSize: {x: 1.28, y: 1.28}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 8.031602, y: 4.0147824}
+  m_EdgeRadius: 0
+--- !u!249 &1352101799
+AreaEffector2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1352101794}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGlobalAngle: 0
+  m_ForceAngle: 0
+  m_ForceMagnitude: 10
+  m_ForceVariation: 0
+  m_ForceTarget: 0
+  m_Drag: 0
+  m_AngularDrag: 0

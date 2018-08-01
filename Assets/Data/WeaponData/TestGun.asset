@@ -23,19 +23,19 @@ MonoBehaviour:
     value:
       currentCryptoKey: 230887
       hiddenValue: e785833f
-      fakeValue: 0
+      fakeValue: 1
       inited: 1
   - type: 3
     valueType: 0
     value:
       currentCryptoKey: 230887
-      hiddenValue: e785e340
-      fakeValue: 0
+      hiddenValue: e7850341
+      fakeValue: 8
       inited: 1
   - type: 1
     valueType: 0
     value:
       currentCryptoKey: 230887
       hiddenValue: e785833f
-      fakeValue: 0
+      fakeValue: 1
       inited: 1

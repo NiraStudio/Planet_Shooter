@@ -271,6 +271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ground: {fileID: 0}
+  DChanger: 0
 --- !u!114 &114349139686417602
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -336,9 +337,10 @@ MonoBehaviour:
   GroundSizeDetection: 1.08
   right: 1
   AmmoPack: {fileID: 1614165933381276, guid: 4dd78fa920511594ca6eb7c098f12723, type: 2}
-  DieParticel: {fileID: 1933253007402338, guid: fa8e01861d81bab48829524ea93bc5bb,
+  DieParticel: {fileID: 1920429637687438, guid: 9b7591cc2640b664fbac37eae860dcfa,
     type: 2}
   ammoAmount: 1
+  carryingCoin: 0
   waitTime: 2
   Bullet: {fileID: 1021236841468290, guid: dcced05b26df94a4fa823153e36409f4, type: 2}
   ShootPos: {fileID: 4021094180150496}
@@ -418,7 +420,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 248155861
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d16b9b912f771194f9e848a20d7d7ddd, type: 3}
   m_Color: {r: 1, g: 0, b: 0.8489032, a: 1}
@@ -459,8 +461,8 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 248155861
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!224 &224083284571351064
 RectTransform:

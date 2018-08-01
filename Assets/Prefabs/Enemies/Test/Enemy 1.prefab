@@ -122,8 +122,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1063621621508716}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.4675016, y: -12.770608, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -2.97342, y: 0.64939624, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
   - {fileID: 224178029934218180}
   m_Father: {fileID: 0}
@@ -161,8 +161,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.004639864, y: 0.058770657}
-  m_Size: {x: 0.62398386, y: 0.6580095}
+  m_Offset: {x: -0.0046398877, y: 0.04313255}
+  m_Size: {x: 1.146637, y: 1.2366168}
   m_Direction: 0
 --- !u!114 &114077385884589626
 MonoBehaviour:
@@ -178,12 +178,13 @@ MonoBehaviour:
   Data: {fileID: 11400000, guid: e8b19b90a9963754aab1856a5d3a61ec, type: 2}
   HpBar: {fileID: 114874894243330968}
   CharacterSizeDetection: 0.36
-  GroundSizeDetection: 0.32
+  GroundSizeDetection: 0.42
   right: 1
   AmmoPack: {fileID: 1614165933381276, guid: 4dd78fa920511594ca6eb7c098f12723, type: 2}
-  DieParticel: {fileID: 1933253007402338, guid: fa8e01861d81bab48829524ea93bc5bb,
+  DieParticel: {fileID: 1147954249786718, guid: e72d5fec9b223a54cae1b817b31f9ff4,
     type: 2}
   ammoAmount: 1
+  carryingCoin: 0
 --- !u!114 &114116913546468444
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -196,6 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ground: {fileID: 0}
+  DChanger: 0
 --- !u!114 &114254236439740858
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -406,10 +408,10 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 248155861
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6d765d4ad9d3a7c43afeb1180ba30416, type: 3}
-  m_Color: {r: 1, g: 0, b: 0.8489032, a: 1}
+  m_Sprite: {fileID: 21300000, guid: bfd5af7f7ac081644a6758098a689ebc, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -447,8 +449,8 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 248155861
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!224 &224062405568430598
 RectTransform:
@@ -504,7 +506,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.036, y: 0.412}
+  m_AnchoredPosition: {x: -0.036, y: 0.819}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224490381131261950

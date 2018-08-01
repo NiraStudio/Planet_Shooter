@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class AmmoItem : PickableItem {
     public float AmmoAmount;
-    public GameObject TextDeatil,vfx;
+    public GameObject vfx;
 
+
+    public GameObject textDetail;
     bool picked;
-    private IEnumerator Start()
+    private void Start()
     {
-        yield return new WaitForSeconds(5);
+        textDetail = Resources.Load<GameObject>("DetailText");
        // Die();
     }
 
@@ -20,7 +22,7 @@ public class AmmoItem : PickableItem {
             return;
 
         vfx.SetActive(true);
-        TextDeatil.SetActive(true);
+        Instantiate(textDetail, transform.position, transform.localRotation).GetComponent<DetailTextController>().Repaint("+1",Color.white);
         CharacterHolder.Instance.GetEnergy(AmmoAmount);
         GetComponent<SFX>().PlaySound("Sound 1");
         Die();
