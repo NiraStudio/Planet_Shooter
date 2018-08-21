@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7285a19c2b515284fb399dcb27c9ab02, type: 3}
+  m_Name: DeffendWall
+  m_EditorClassIdentifier: 
+  itemName: DeffendWall
+  id: 3
+  limit: 2
+  prefab: {fileID: 1764599152803158, guid: ec0cb8d005fc3e3468c962017b2c8526, type: 2}
+  instasiatePos: {x: 1.5, y: 0.3}
+  price:
+    type: 0
+    amount: 0

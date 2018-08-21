@@ -10,7 +10,8 @@ public class Bullet : MonoBehaviour {
     public float speed;
     public LayerMask DetectionLayer;
     public Vector2 OverLapBoxSize;
-
+    public Transform shape;
+    public bool Rotate;
     public float lifeTime;
 
     protected bool release;
@@ -18,6 +19,7 @@ public class Bullet : MonoBehaviour {
     protected int direction=1;
     protected Rigidbody2D rg;
     protected Collider2D detect;
+    Transform shooter;
 	// Use this for initialization
 	protected virtual void Start () {
         rg= GetComponent<Rigidbody2D>();
@@ -28,22 +30,26 @@ public class Bullet : MonoBehaviour {
 	protected virtual void Update () {
         if (!release)
             return;
+        if (Rotate)
+            shape.Rotate(0, 0, 250 * Time.deltaTime * direction);
+
         rg.velocity = transform.right * speed*direction;
         detect = Physics2D.OverlapBox(transform.position, OverLapBoxSize, 0, DetectionLayer);
         if (detect)
             OnTargetHit();
     }
 
-    public void Release(int direction,float dmg)
+    public void Release(int direction,float dmg,Transform shooter)
     {
        this. direction = direction;
         this.dmg = dmg;
+        this.shooter = shooter;
         release = true;
     }
     
     public virtual void OnTargetHit()
     {
-        detect.GetComponent<Ihitable>().OnHit(dmg);
+        detect.GetComponent<Ihitable>().OnHit(dmg,shooter);
         Destroy(gameObject);
 
     }

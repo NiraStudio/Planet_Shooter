@@ -349,7 +349,8 @@ MonoBehaviour:
   GroundSizeDetection: -0.59
   right: 0
   AmmoPack: {fileID: 0}
-  DieParticel: {fileID: 0}
+  DieParticel: {fileID: 1402615151525812, guid: 5fc7c0b90f0e65440a08694994f6176d,
+    type: 2}
   ammoAmount: 0
   carryingCoin: 0
 --- !u!114 &114894739995663444

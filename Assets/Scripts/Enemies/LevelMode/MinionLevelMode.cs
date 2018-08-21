@@ -16,8 +16,8 @@ public class MinionLevelMode : LevelModeEnemy {
     {
         base.Update();
 
-        t += Time.deltaTime;
 
+        anim.SetBool("Move", ground);
         /*if (t >= 5)
             if (Random.Range(0, 100) <= 15)
             {

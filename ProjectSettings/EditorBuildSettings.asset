@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level_Mode.unity
     guid: befb04605a2453846a34dc85865c54d3
+  - enabled: 1
+    path: Assets/Scenes/Arena_Mode.unity
+    guid: e6a0da5941153c14384530984810aeef
   m_configObjects: {}

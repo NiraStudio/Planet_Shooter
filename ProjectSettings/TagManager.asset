@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Cage
   layers:
   - Default
   - TransparentFX
@@ -21,8 +22,8 @@ TagManager:
   - CharacterHitet
   - PickableItem
   - EnemyBullet
-  - 
-  - 
+  - CharacterAI
+  - Cage
   - 
   - 
   - 

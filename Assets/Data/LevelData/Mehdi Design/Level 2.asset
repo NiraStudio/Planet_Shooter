@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Name: Level 2
   m_EditorClassIdentifier: 
   LevelName: Level 2
-  LevelMulti: 1.2
+  LevelHPMulti: 1
+  LevelDmgMulti: 1
   enemies:
   - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
     Time: 1
@@ -105,7 +106,6 @@ MonoBehaviour:
   winRewards:
   - icon: {fileID: 0}
     type: 0
-    amount: 50
+    amount: 130
     weaponID: 0
     skinID: 0
-  lostRewards: []

@@ -24,4 +24,8 @@ public class GroundLooker : MonoBehaviour {
         angle += 90+DChanger;
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
+    public void ChangeOffset(float a)
+    {
+        DChanger = a;
+    }
 }

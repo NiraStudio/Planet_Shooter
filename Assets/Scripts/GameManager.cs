@@ -63,6 +63,10 @@ public class GameManager : MainBehavior
     {
         return weaponDB.GiveByID(1);
     }
+    public WeaponData GetWeapon(int id)
+    {
+        return weaponDB.GiveByID(id);
+    }
 
 
     #region Data Changer Methods

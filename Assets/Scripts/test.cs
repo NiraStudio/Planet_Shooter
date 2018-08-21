@@ -7,9 +7,13 @@ public class test : MonoBehaviour {
     public Texture2D[] frames;
     int framesPerSecond = 10;
 
+    public Arena.ItemAction A;
+    private void Start()
+    {
+        print(gameObject.layer == 13);
+    }
     void Update() {
-        int index =(int) Time.time * framesPerSecond;
-       // index = index % frames.Length;
-       // renderer.material.mainTexture = frames[index];
+        // index = index % frames.Length;
+        // renderer.material.mainTexture = frames[index];
     }
 }

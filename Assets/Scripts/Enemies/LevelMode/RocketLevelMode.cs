@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class RocketLevelMode : LevelModeEnemy {
 
-
     public override void Start()
     {
         base.Start();
@@ -26,18 +25,19 @@ public class RocketLevelMode : LevelModeEnemy {
         }
 
         if (ground)
-            OnDie();
+            OnDie(null);
     }
 
-    public override void OnDie()
+    public override void OnDie(Transform Killer)
     {
         //explode
+        Instantiate(DieParticel, transform.position, transform.rotation*=Quaternion.Euler(0,0,180));
         Destroy(gameObject);
     }
     public override void OnCharacterEnter()
     {
         base.OnCharacterEnter();
-        OnDie();
+        OnDie(null);
     }
 
 

@@ -11,12 +11,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f95608bb8ed5514f949e739105907c0, type: 3}
   m_Name: TestGun
   m_EditorClassIdentifier: 
-  weaponName: TestGun
+  weaponName: FirstGun
   id: 1
-  icon: {fileID: 21300000, guid: 28b41fef228d6814f90e541deaf9f262, type: 3}
+  icon: {fileID: 21300002, guid: 785fac1c7e3809b4ba694d118c84729b, type: 3}
   type: 0
   quality: 0
-  prefab: {fileID: 1776903609485838, guid: 4ae906dbbfda63c46866fa6cd37ced40, type: 2}
+  prefab: {fileID: 1477105619319700, guid: b6ee7d938d7c6d64fa7c49a0006728d1, type: 2}
   attributes:
   - type: 2
     valueType: 0
@@ -29,8 +29,8 @@ MonoBehaviour:
     valueType: 0
     value:
       currentCryptoKey: 230887
-      hiddenValue: e7850341
-      fakeValue: 8
+      hiddenValue: e785e340
+      fakeValue: 7
       inited: 1
   - type: 1
     valueType: 0

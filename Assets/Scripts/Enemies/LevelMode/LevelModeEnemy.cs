@@ -12,7 +12,7 @@ public class LevelModeEnemy : Enemy {
     [HideInInspector]
     public int carryingCoin;
     protected SFX sfx;
-    LevelModeGameManager LM;
+    protected LevelModeGameManager LM;
 
     float LevelMulti;
     public override void Start()
@@ -26,13 +26,14 @@ public class LevelModeEnemy : Enemy {
         sfx = GetComponent<SFX>();
         carryingCoin = Data.CoindCapacity * LM.EnemyCoinDivide;
     }
-    public override void OnDie()
+    public override void OnDie(Transform Killer)
     {
         //CoinGetting
         Instantiate(AmmoPack, transform.position, Quaternion.identity).SendMessage("ChangeAmmo", ammoAmount);//Ammo
         Instantiate(DieParticel, transform.position, transform.localRotation);//Die Particle
         ComboManager.Instance.AddCombo(1);// Adding Combo(Need To Remove)
         LM.AddScore(ComboManager.Instance.Combo*100*Data.dmg);//Adding Score (need To Remove)
+        LM.coin += carryingCoin;//Adding Coin (Need to Visualize)
         Destroy(gameObject);
     }
 }

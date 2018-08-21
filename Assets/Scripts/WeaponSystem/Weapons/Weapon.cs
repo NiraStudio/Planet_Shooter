@@ -11,6 +11,9 @@ public class Weapon : MonoBehaviour {
     protected Transform shootPos;
     protected SFX sfx;
     protected PowerUpManager PUM;
+    [HideInInspector]
+    public GameObject Shooter;
+    protected Animator anim;
     public float Damage
     {
         get
@@ -26,7 +29,12 @@ public class Weapon : MonoBehaviour {
         }
     }
     float _damage;
-
+    [HideInInspector]
+    public bool AI;
+    public bool Empty
+    {
+        get { return Ammo < 1; }
+    }
     // This Var Show CharacterHolder Direction
     public int Direction
     {
@@ -71,13 +79,14 @@ public class Weapon : MonoBehaviour {
 
 
     float _ammo, _maxAmmo;
-
     protected CharacterHolder CH;
 	// Use this for initialization
 	void Start () {
         PUM = PowerUpManager.Instance;
         _ammo = _maxAmmo;
         sfx = GetComponent<SFX>();
+        if (GetComponent<Animator>())
+            anim = GetComponent<Animator>();
 	}
 
     protected virtual void Update()
@@ -85,6 +94,13 @@ public class Weapon : MonoBehaviour {
         if (GamePlayManager.GPM == null)
             return;
         if (GamePlayManager.GPM.gamePlayState != GamePlayState.Play)
+            return;
+
+
+
+        AmmoRegenerationMethod();
+
+        if (AI)
             return;
 
         if (Application.isEditor)
@@ -95,7 +111,7 @@ public class Weapon : MonoBehaviour {
                 OnTouchStationary();
 
         }
-
+      
         #region MobileController
 #if UNITY_ANDROID || UNITY_IOS
         if (Input.touchCount == 1)
@@ -126,18 +142,17 @@ public class Weapon : MonoBehaviour {
 #endif
         #endregion
 
-        AmmoRegenerationMethod();
     }
 
     // This Methods Called By Touching
 
-    protected virtual void OnTouchBegin() { }
-    protected virtual void OnTouchMoved() { }
-    protected virtual void OnTouchStationary() { }
-    protected virtual void OnTouchEnded() { }
-    protected virtual void OnTouchCanceled() { }
+    public virtual void OnTouchBegin() { }
+    public virtual void OnTouchMoved() { }
+    public virtual void OnTouchStationary() { }
+    public virtual void OnTouchEnded() { }
+    public virtual void OnTouchCanceled() { }
 
-
+    public virtual void Shoot() { }
 
  
    

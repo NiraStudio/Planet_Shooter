@@ -4,11 +4,6 @@ using UnityEngine;
 using Attributes;
 
 public class CharacterHolder : MainBehavior,Ihitable {
-    public static CharacterHolder Instance;
-    void Awake()
-    {
-        Instance = this;
-    }
 
     public GameObject characterShape, characterGhost;
     public Transform WeaponPos;
@@ -29,28 +24,83 @@ public class CharacterHolder : MainBehavior,Ihitable {
 
 
 
+    //--------------Delegates----------
+    public MoveDelegate Movement;
+    public MoveDelegate NormalMovementMethod;
+    public MoveDelegate JetPackMovementMethod;
+
+    public HitDelegate Hit;
+    public HitDelegate normalHit;
+
+
     float regenerateSpeed;
     bool right=true;
     bool ground;
-    int direction = -1;
-    Rigidbody2D rg;
+    [HideInInspector]
+    public int direction = 1;
+    protected Rigidbody2D rg;
     Animator anim;
-    WeaponData weaponData;
-    GameManager GM;
+    protected WeaponData weaponData;
+    protected Skin sk;
+    protected GameManager GM;
     GameObject detailText;
     Transform CenterSpace;
-    GamePlayManager GPM;
+    protected GamePlayManager GPM;
     PowerUpManager PUM;
 
     float j;
-	// Use this for initialization
-	protected virtual void  Start () {
+
+    private void Awake()
+    {
+        GM = GameManager.Instance;
+    }
+
+    // Use this for initialization
+    protected virtual void  Start () {
         rg = GetComponent<Rigidbody2D>();
         CenterSpace = GameObject.FindWithTag("Ground").transform;
-        GM = GameManager.Instance;
         GPM = GamePlayManager.GPM;
         PUM = PowerUpManager.Instance;
         detailText = Resources.Load<GameObject>("DetailText");
+
+
+
+        #region Movement Delegates
+
+        NormalMovementMethod = () =>
+        {
+            if (ground&&j<=0)
+                rg.velocity = transform.right * direction * speed;
+        };
+        JetPackMovementMethod = () =>
+        {
+            Vector2 tt = rg.velocity;
+            if (Vector2.Distance(transform.position, CenterSpace.transform.position) < 8)
+            {
+                tt = ((Vector2)transform.up * 7) + ((Vector2)transform.right * speed * direction);
+            }
+            rg.velocity = tt;
+        };
+
+        Movement = NormalMovementMethod;
+
+
+        normalHit = ((dmg, Hiter, character) =>
+          {
+              _hp -= dmg;
+              if (_hp > 0)
+              {
+                  ComboManager.Instance.RemoveCombo();
+                  GetComponent<CharacterHitScript>().Hited();
+              }
+              else
+                  OnDie(Hiter);
+
+          });
+        Hit = normalHit;
+        #endregion
+
+
 
         characterShape.SetActive(true);
         characterGhost.SetActive(false);
@@ -64,40 +114,20 @@ public class CharacterHolder : MainBehavior,Ihitable {
 
         if (GPM.gamePlayState != GamePlayState.Play)
         {
+            direction = 0;
             rg.velocity = Vector2.zero;
             return;
         }
 
-        if (Application.isEditor)
-        {
+        if (direction == 0)
+            direction = 1;
 
-            if (Input.GetMouseButtonDown(1))
-                ChangeDirection();
-
-            if (Input.GetKeyDown(KeyCode.H))
-                Jump();
-        }
+    
         ground = Physics2D.Raycast(transform.position, transform.up * -1, .3f, GroundLayer);
 
 
-        //move Part
 
-        if (PUM.IsActive(PowerUpType.JetPack))
-        {
-            Vector2 tt=rg.velocity ;
-            if (Vector2.Distance(transform.position, CenterSpace.transform.position) < 8)
-            {
-                tt =((Vector2) transform.up * 7)+((Vector2)transform.right*speed*direction);
-            }
-            rg.velocity = tt; 
-        }
-        else if(j>0)
-        {
-            j -= Time.deltaTime;
-        }
-        else if (ground)
-            rg.velocity = transform.right * direction * speed;
-
+        Movement();
 
 
         if (direction == 1 & !right)
@@ -106,17 +136,15 @@ public class CharacterHolder : MainBehavior,Ihitable {
             Flip();
 
 
-
-
-
         CharacterAnimator.SetBool("Move", direction == 0 ? false:true);
     }
 
     public virtual void Jump()
     {
         j=0.3f;
-        PUM.Activate(PowerUpType.JetPack);
-       // rg.AddForce(transform.up * 750, ForceMode2D.Force);
+        // PUM.Activate(PowerUpType.JetPack);
+        CharacterAnimator.SetTrigger("Jump");
+        rg.AddForce(transform.up * 750, ForceMode2D.Force);
     }
 
     public virtual void Initialize()
@@ -139,9 +167,9 @@ public class CharacterHolder : MainBehavior,Ihitable {
 
     public virtual void InitializedWeapon()
     {
-        weaponData = GM.GetCurrentWeapon();
         GameObject g= Instantiate(weaponData.prefab, WeaponPos.position, Quaternion.identity);
         weapon = g.GetComponent<Weapon>();
+        weapon.Shooter = gameObject;
         g.transform.SetParent(WeaponPos);
         g.transform.localScale = Vector2.one;
         g.transform.localRotation = Quaternion.Euler(0,0,0);
@@ -150,9 +178,8 @@ public class CharacterHolder : MainBehavior,Ihitable {
 
     public virtual void InitializeSkin()
     {
-        Skin a = SM.SkinByID(GM.CurrentSkin);
-        SM.LoadSkin(a);
-        AttributeChanger(a.attributes);
+        SM.LoadSkin(sk);
+        AttributeChanger(sk.attributes);
     }
 
     public void AttributeChanger(List<Attribute> at)
@@ -218,14 +245,8 @@ public class CharacterHolder : MainBehavior,Ihitable {
 
     }
 
-    public virtual void OnHit(float dmg)
+    public virtual void OnHit(float dmg, Transform Hiter)
     {
-
-        if (PUM.IsActive(PowerUpType.Bomb))
-        {
-            //make bomb
-            return;
-        }
 
         if (PUM.IsActive(PowerUpType.Shield))
         {
@@ -235,17 +256,10 @@ public class CharacterHolder : MainBehavior,Ihitable {
 
 
 
-        _hp -= dmg;
-        if (_hp > 0)
-        {
-            ComboManager.Instance.RemoveCombo();
-            GetComponent<CharacterHitScript>().Hited();
-        }
-        else
-            OnDie();
+        Hit(dmg,Hiter,transform);
     }
 
-    public virtual void OnHeal(float Amount)
+    public virtual void OnHeal(float Amount,Transform Healer)
     {
     }
 
@@ -254,7 +268,7 @@ public class CharacterHolder : MainBehavior,Ihitable {
         weapon.GetAmmo(Amount);
     }
 
-    public virtual void OnDie()
+    public virtual void OnDie(Transform Killer)
     {
         characterGhost.SetActive(true);
         characterShape.SetActive(false);
@@ -279,3 +293,8 @@ public class CharacterHolder : MainBehavior,Ihitable {
 
     }
 }
+
+
+public delegate void MoveDelegate();
+
+public delegate void HitDelegate(float dmg,Transform hitter, Transform character);

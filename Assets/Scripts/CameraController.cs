@@ -4,54 +4,50 @@ using UnityEngine;
 using Cinemachine;
 
 public class CameraController : MonoBehaviour {
+
     public static CameraController Instance;
-
+    public float OthSize;
+    public Transform Character;
     public Vector3 offSet;
-    [SerializeField]
-    List<GameObject> Targets = new List<GameObject>();
-
-    public Transform CharacterTransform;
-
-    public float minZoom = 10f;
-    public float maxZoom = 40f;
-    public float zoomLimiter = 50f;
-
-    public bool Character;
-    Bounds boundtemp;
+    public float DistanceSize,rotationSmoothness,followSmoothness;
     CinemachineVirtualCamera cam;
-    Vector3 velocity;
     void Awake()
     {
         Instance = this;
     }
-    void Start()
+    IEnumerator Start()
     {
         cam = GetComponent<CinemachineVirtualCamera>();
-
-    }
-    void Update()
-    {
-        if (Character)
+        while (Mathf.Round(cam.m_Lens.OrthographicSize) != OthSize)
         {
-
-           // if()
-
-           // transform.position = Vector3.Lerp(transform.position, CharacterTransform.position+new Vector3(0,1,-10), Time.deltaTime);
-
-
-
-            transform.localRotation = Quaternion.Lerp(transform.localRotation, CharacterTransform.localRotation, Time.deltaTime);
-            if(Mathf.Round( cam.m_Lens.OrthographicSize)!=4)
-            cam.m_Lens.OrthographicSize = Mathf.Lerp(cam.m_Lens.OrthographicSize, 4f, Time.deltaTime);
-            return;
+            cam.m_Lens.OrthographicSize = Mathf.Lerp(cam.m_Lens.OrthographicSize, OthSize, Time.deltaTime);
+            yield return null;
         }
 
+    }
+    void FixedUpdate()
+    {
 
-        
+        /*if (Vector2.Distance(Character.position+offSet, transform.position) > DistanceSize)
+            transform.position = Vector3.Lerp(transform.position, Character.transform.position + offSet, Time.deltaTime*followSmoothness);*/
+
+       // transform.position = Character.position+offSet;
+
+        if(cam.transform.localEulerAngles!= Character.localEulerAngles)
+        {
+
+            cam.transform.rotation = Quaternion.Slerp(cam.transform.rotation, Character.rotation, Time.deltaTime*rotationSmoothness);
+        }
+
+       
+       
+
+
+
     }
 
 
-
+    /*
     void Move()
     {
         transform.position = Vector3.SmoothDamp(transform.position, GetCenterOfTargets() + offSet, ref velocity, 0.5f);
@@ -109,10 +105,11 @@ public class CameraController : MonoBehaviour {
     {
         Character = true;
     }
-
-    private void OnDrawGizmosSelected()
+    */
+    private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position, boundtemp.size);
+        //Gizmos.DrawWireCube(transform.position, boundtemp.size);
     }
+
+
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class RewardManager : MonoBehaviour
 {
     public static RewardManager Instance;
-    public Sprite Coin_Icon, NiraCoin_Icon, Xp_Icon,Power_Up_DD_Icon, Power_Up_Slow_Icon, Power_Up_Shield_Icon, Power_Up_JetPack_Icon, Power_Up_Bomb_Icon;
+    public Sprite Coin_Icon, NiraCoin_Icon, Xp_Icon,Power_Up_DD_Icon,  Power_Up_Shield_Icon, Power_Up_JetPack_Icon;
 
     private void Awake()
     {
@@ -43,12 +43,6 @@ public class RewardManager : MonoBehaviour
                 return Power_Up_DD_Icon;
             case PowerUpType.Shield:
                 return Power_Up_Shield_Icon;
-
-            case PowerUpType.Slow:
-                return Power_Up_Slow_Icon;
-
-            case PowerUpType.Bomb:
-                return Power_Up_Bomb_Icon;
 
             case PowerUpType.JetPack:
                 return Power_Up_JetPack_Icon;
@@ -133,4 +127,16 @@ public class Reward
 public enum RewardType
 {
     Coin,XP,NiraCoin,Weapon,Skin
+}
+
+[System.Serializable]
+public class Currency
+{
+    public CurrencyType type;
+    public int amount;
+}
+
+public enum CurrencyType
+{
+    Coin, NiraCoin
 }

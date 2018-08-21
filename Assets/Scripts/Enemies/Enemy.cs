@@ -11,6 +11,7 @@ public class Enemy : MainBehavior, Ihitable
 
     public EnemyData Data;
     public Slider HpBar;
+    public Animator anim;
     public float CharacterSizeDetection;
     public float GroundSizeDetection;
     public bool right;
@@ -38,28 +39,25 @@ public class Enemy : MainBehavior, Ihitable
     protected float dmg;
     protected Rigidbody2D rg;
     protected Collider2D characterCollider;
-    protected Animator anim;
     protected int direction = 0;
     protected bool ground;
     protected float dazedTime, stopTime;
     protected GameObject detailText;
 
     Transform CenterSpace;
-    float MoveAllow;
-    GamePlayManager GPM;
-    CharacterHolder CH;
+    protected float MoveAllow;
+    protected GamePlayManager GPM;
     PowerUpManager pu;
+
+    protected float j;
     // Use this for initialization
     public virtual void Start()
     {
         GPM = GamePlayManager.GPM;
-        CH = CharacterHolder.Instance;
         CenterSpace = GameObject.FindWithTag("Ground").transform;
         detailText = Resources.Load<GameObject>("DetailText");
         pu = PowerUpManager.Instance;
         rg = GetComponent<Rigidbody2D>();
-        CameraController.Instance.AddTarget(gameObject);
-        anim = GetComponent<Animator>();
         RenewState();
 
         HpBar.gameObject.SetActive(false);
@@ -85,11 +83,13 @@ public class Enemy : MainBehavior, Ihitable
         ground = Physics2D.Raycast(transform.position, transform.up * -1, GroundSizeDetection, GroundLayer);
 
         #region MoveAllow
-        MoveAllow = (stopTime > 0 ? 0 : 1) * (dazedTime > 0 ? 0 : 1)*(pu.IsActive(PowerUpType.Slow)?0.2f:1);
+        MoveAllow = (stopTime > 0 ? 0 : 1) * (dazedTime > 0 ? 0 : 1);
 
         #endregion
 
-        if (ground)
+        if (j > 0)
+            j -= Time.deltaTime;
+        else if (ground)
             rg.velocity = transform.right * MoveAllow * direction * speed;
 
         #region Flip
@@ -125,7 +125,7 @@ public class Enemy : MainBehavior, Ihitable
     }
     public virtual void OnCharacterEnter()
     {
-        characterCollider.GetComponent<Ihitable>().OnHit(dmg);
+        characterCollider.GetComponent<Ihitable>().OnHit(dmg,transform);
     }
     public virtual void OnUpdate() { }
     public virtual void OnStart() { }
@@ -143,7 +143,12 @@ public class Enemy : MainBehavior, Ihitable
     {
         stopTime = time;
     }
-    public virtual void OnHit(float dmg)
+    public void Jump(Vector2 force)
+    {
+        j = 0.3f;
+        rg.AddForce(transform.up * force, ForceMode2D.Impulse);
+    }
+    public virtual void OnHit(float dmg, Transform Hiter)
     {
         if (!HpBar.gameObject.activeInHierarchy)
             HpBar.gameObject.SetActive(true);
@@ -156,19 +161,19 @@ public class Enemy : MainBehavior, Ihitable
         if (hitPoint <= 0)
         {
             hitPoint = 0;
-            OnDie();
+            OnDie(Hiter);
         }
     }
-    public virtual void OnHeal(float dmg)
+    public virtual void OnHeal(float dmg,Transform Healer)
     {
     }
-    public virtual void OnDie()
+    public virtual void OnDie(Transform Killer)
     {
         Destroy(gameObject);
     }
 
 
-    void Flip()
+   public  void Flip()
     {
         Vector3 t = transform.localScale;
         t.x *= -1;

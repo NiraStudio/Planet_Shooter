@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Name: Level 1
   m_EditorClassIdentifier: 
   LevelName: Level 1
-  LevelMulti: 1
+  LevelHPMulti: 1
+  LevelDmgMulti: 1
   enemies:
   - Enemy: {fileID: 1063621621508716, guid: 594da61be08a9c04e8722aeabddfdcf8, type: 2}
     Time: 1
@@ -94,5 +95,9 @@ MonoBehaviour:
     Time: 24
     SpawnPos: {x: -5.5197234, y: -10.325557}
     dir: 1
-  winRewards: []
-  lostRewards: []
+  winRewards:
+  - icon: {fileID: 0}
+    type: 0
+    amount: 100
+    weaponID: 0
+    skinID: 0

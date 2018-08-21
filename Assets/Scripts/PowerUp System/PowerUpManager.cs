@@ -12,66 +12,100 @@ public class PowerUpManager : MonoBehaviour {
     {
         Instance = this;
     }
+    public int ty;
+    [Range(0, 100)]
+    public float Chance;
+    public NumberRange WaitTime;
+    public float spawnDistance;
+    public List<PowerUpDetails> PowerUpsDetails = new List<PowerUpDetails>();
 
-    public Button Slot, Ad_Slot;
-    public List<PowerUpByTime> powerUpsByTime = new List<PowerUpByTime>();
-
-    [SerializeField]
     List<PowerUpState> powerUpsState = new List<PowerUpState>();
-
-
-    // Use this for initialization
-    void Start () {
+    float time;
+    [SerializeField]
+    Transform center;
+    PowerUpDetails p;
+    void Start() {
         var myEnumMemberCount = System.Enum.GetNames(typeof(PowerUpType)).Length;
-        for (int i = 1; i < myEnumMemberCount; i++)
-        {
-            powerUpsState.Add(new PowerUpState((PowerUpType)i, false,0));
-        }
+       
+        time = WaitTime.RandomInt;
 
 
-        //repaint 1st Slot
-        if (GameManager.Instance.SlotPowerUp != 0)
+        // Sorting by Percent >
+        for (int i = 0; i < PowerUpsDetails.Count - 1; i++)
         {
-            Slot.onClick.AddListener(() =>
+            for (int j = i + 1; j < PowerUpsDetails.Count; j++)
             {
-                Activate(GameManager.Instance.SlotPowerUp);
-            });
-            Slot.gameObject.SetActive(true);
-            Slot.GetComponent<Image>().sprite = RewardManager.Instance.PowerUpIcon(GameManager.Instance.SlotPowerUp);
+                if (PowerUpsDetails[i].percent < PowerUpsDetails[j].percent)
+                {
+                    p = PowerUpsDetails[i];
+                    PowerUpsDetails[i] = PowerUpsDetails[j];
+                    PowerUpsDetails[j] = p;
+                }
+            }
         }
-        else
-            Slot.gameObject.SetActive(false);
 
-        //Repaint Ad Slot
-        if (GameManager.Instance.AdSlotPowerUp != 0)
+        foreach (var item in PowerUpsDetails.ToArray())
         {
-            Ad_Slot.onClick.AddListener(() =>
-            {
-                Activate(GameManager.Instance.AdSlotPowerUp);
-            });
-            Ad_Slot.gameObject.SetActive(true);
-            Ad_Slot.GetComponent<Image>().sprite = RewardManager.Instance.PowerUpIcon(GameManager.Instance.AdSlotPowerUp);
+            item.UI.maxValue = item.time;
+            item.UI.gameObject.SetActive(false);
+        }
+
+
+        foreach (var item in PowerUpsDetails.ToArray())
+        {
+            powerUpsState.Add(new PowerUpState(item.type, 0));
 
         }
-        else
-            Ad_Slot.gameObject.SetActive(false);
+
+
+
     }
-	
-	// Update is called once per frame
-	void Update () {
-        foreach (var item in powerUpsState.ToArray())
-        {
-            if (item.time > 0)
-                item.time -= Time.deltaTime;
 
-            item.active = item.time > 0;
+    // Update is called once per frame
+    void Update() {
+        for (int i = 0; i < powerUpsState.Count; i++)
+        {
+            if (powerUpsState[i].time > 0)
+            {
+                powerUpsState[i].time -= Time.deltaTime;
+                PowerUpsDetails[i].UI.value = powerUpsState[i].time;
+                if (powerUpsState[i].time <= 0)
+                {
+                    PowerUpsDetails[i].OnEnd.Invoke();
+                    PowerUpsDetails[i].UI.gameObject.SetActive(false);
+                }
+            }
         }
-	}
+       
+
+        if (Input.GetKeyDown(KeyCode.Space)) {
+
+            if (Random.Range(0, 101) < Chance)
+                MakePowerUp();
+            else
+                print("Nothing For You Sorry!!");
+        }
+
+        if (time > 0)
+            time -= Time.deltaTime;
+        else
+        {
+            ty += 1;
+            if (Random.Range(0, 101) < Chance)
+                MakePowerUp();
+            else
+                print("Nothing For You Sorry!!");
+            time = WaitTime.RandomInt;
+
+        }
+
+    }
+
 
 
     public float getPowerUpTime(PowerUpType type)
     {
-        foreach (var item in powerUpsByTime.ToArray())
+        foreach (var item in PowerUpsDetails.ToArray())
         {
             if (item.type == type)
             {
@@ -82,6 +116,32 @@ public class PowerUpManager : MonoBehaviour {
         return 0;
     }
 
+    public void MakePowerUp()
+    {
+
+        
+        float AllPercent=0;
+        for (int i = 0; i < PowerUpsDetails.Count; i++)
+        {
+            AllPercent += PowerUpsDetails[i].percent;
+        }
+        float r = Random.Range(0, AllPercent);
+        foreach (var item in PowerUpsDetails.ToArray())
+        {
+            if(r<=item.percent)
+            {
+                p = item;
+                break;
+            }
+            r -= item.percent;
+        }
+        print("All : "+AllPercent + " R: " + r+" ty :"+ty+" Type :"+p.type);
+
+        Vector2 t = Random.insideUnitCircle;
+        t.Normalize();
+        Instantiate(p.prefab, t * spawnDistance, Quaternion.identity);
+
+    }
 
 
     public bool IsActive(PowerUpType type)
@@ -90,33 +150,40 @@ public class PowerUpManager : MonoBehaviour {
         {
             if (item.type == type)
             {
-                return item.active;
+                return item.time > 0; ;
             }
         }
 
         return false;
     }
 
-    public bool Activate(PowerUpType type)
+    public void Activate(PowerUpType type)
     {
-        foreach (var item in powerUpsState.ToArray())
+
+
+        for (int i = 0; i < powerUpsState.Count; i++)
         {
-            if (item.type == type)
+            if (powerUpsState[i].type ==type)
             {
-                item.time = getPowerUpTime(type);
+                powerUpsState[i].time = getPowerUpTime(type);
+                PowerUpsDetails[i].OnStart.Invoke();
+                PowerUpsDetails[i].UI.gameObject.SetActive(true);
+                PowerUpsDetails[i].UI.value = PowerUpsDetails[i].UI.maxValue;
+                print(powerUpsState[i].type + "   :_" + PowerUpsDetails[i].type);
             }
         }
-        return false;
+
+       
     }
 
 
     private void Reset()
     {
-        powerUpsByTime = new List<PowerUpByTime>();
+        PowerUpsDetails = new List<PowerUpDetails>();
         var myEnumMemberCount = System.Enum.GetNames(typeof(PowerUpType)).Length;
-        for (int i = 1; i < myEnumMemberCount; i++)
+        for (int i = 0; i < myEnumMemberCount; i++)
         {
-            powerUpsByTime.Add(new PowerUpByTime((PowerUpType)i, 0));
+            PowerUpsDetails.Add(new PowerUpDetails((PowerUpType)i, 0));
         }
     }
 }
@@ -125,12 +192,18 @@ public class PowerUpManager : MonoBehaviour {
 namespace PowerUps
 {
     [System.Serializable]
-    public class PowerUpByTime
+    public class PowerUpDetails
     {
         public PowerUpType type;
         public float time;
+        [Range(0,100)]
+        public float percent;
+        public Slider UI;
+        public UnityEvent OnStart, OnEnd;
 
-        public PowerUpByTime(PowerUpType tt, float t)
+        public GameObject prefab;
+
+        public PowerUpDetails(PowerUpType tt, float t)
         {
             type = tt;
             time = t;
@@ -142,13 +215,11 @@ namespace PowerUps
     public class PowerUpState
     {
         public PowerUpType type;
-        public bool active;
         public float time;
 
-        public PowerUpState(PowerUpType t,bool a,float tt)
+        public PowerUpState(PowerUpType t,float tt)
         {
             type = t;
-            active = a;
             time = tt;
         }
     }
@@ -157,7 +228,7 @@ namespace PowerUps
 
 public enum PowerUpType
 {
-    Null,DoubleAttack,Shield,Slow,Bomb,JetPack,SpeedUp
+    DoubleAttack,Shield,JetPack
 }
 
 

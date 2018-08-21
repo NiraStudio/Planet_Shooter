@@ -18,7 +18,8 @@ public class ShareManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        t.text =((int)( 1 / Time.deltaTime)).ToString();
+        t.text ="FPS: " +
+            ""+((int)( 1 / Time.deltaTime)).ToString();
 	}
 
 

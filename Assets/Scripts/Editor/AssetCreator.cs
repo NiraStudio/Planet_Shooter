@@ -19,8 +19,14 @@ public class AssetCreator : MonoBehaviour {
         ScriptableObjectUtility.CreateAsset<LevelData>("LevelData");
     }
 
+    [MenuItem("AlphaTool/Data Creator/Create Item Data")]
+    public static void CreateItemData()
+    {
+        ScriptableObjectUtility.CreateAsset<ItemData>("ItemData");
+    }
 
-    
+
+
 
 
 

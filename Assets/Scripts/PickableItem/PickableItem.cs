@@ -5,15 +5,16 @@ using UnityEngine.Events;
 
 public class PickableItem : MonoBehaviour {
     public LayerMask DetectedLayer;
+    public Vector3 offSet;
     public float DetectSize;
 
-    Collider2D DetectedCollider;
+    protected Collider2D DetectedCollider;
 	// Use this for initialization
 	
 	
 	// Update is called once per frame
-	void Update () {
-        DetectedCollider = Physics2D.OverlapCircle(transform.position, DetectSize, DetectedLayer);
+	public virtual void Update () {
+        DetectedCollider = Physics2D.OverlapCircle(transform.position+offSet, DetectSize, DetectedLayer);
         if (DetectedCollider)
         {
             OnPick();
@@ -27,7 +28,12 @@ public class PickableItem : MonoBehaviour {
     {
         Gizmos.color = Color.green;
 
-        Gizmos.DrawWireSphere(transform.position, DetectSize);
+        Gizmos.DrawWireSphere(transform.position+offSet, DetectSize);
     }
 
+
+    public void DestroyGameObject()
+    {
+        Destroy(gameObject);
+    }
 }

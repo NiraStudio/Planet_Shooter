@@ -7,7 +7,6 @@ public class GamePlayManager : MainBehavior {
     public static GamePlayManager GPM;
 
     public GamePlayState gamePlayState;
-    LevelModeGamePlayUI GPUI;
     protected GameManager gm;
     public List<GameObject> enemies = new List<GameObject>();
     string path;

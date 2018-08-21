@@ -23,6 +23,7 @@ public class LevelModeGameManager : GamePlayManager {
     public LevelData levelData;
     public GameObject spawnPoint;
     public List<EnemyPoint> enemyPoints = new List<EnemyPoint>();
+    LevelModeGamePlayUI GPUI;
 
     public float timeSpend=0;
     public float LevelMulti
@@ -31,6 +32,7 @@ public class LevelModeGameManager : GamePlayManager {
     }
     float t;
     public int EnemyCoinDivide;
+    public int coin;
     public float Score;
     // Use this for initialization
     public override void Start()
@@ -101,7 +103,7 @@ public class LevelModeGameManager : GamePlayManager {
             enemyPoints.Add(p);
         }
 
-       // EnemyCoinDivide = levelData.LevelGold / a;
+        EnemyCoinDivide = levelData.LevelGold / a;
 
     }
     private void Reset()
@@ -135,7 +137,6 @@ public class LevelModeGameManager : GamePlayManager {
     {
         print("Time Spend: "+timeSpend);
         gamePlayState = GamePlayState.Finished;
-        CameraController.Instance.ZoomToChatacter();
         yield return new WaitForSeconds(4);
         LoadScene("Main_Menu");
     }

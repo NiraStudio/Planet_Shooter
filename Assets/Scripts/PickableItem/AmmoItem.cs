@@ -23,8 +23,7 @@ public class AmmoItem : PickableItem {
 
         vfx.SetActive(true);
         Instantiate(textDetail, transform.position, transform.localRotation).GetComponent<DetailTextController>().Repaint("+1",Color.white);
-        CharacterHolder.Instance.GetEnergy(AmmoAmount);
-        GetComponent<SFX>().PlaySound("Sound 1");
+        DetectedCollider.GetComponent<CharacterHolder>().GetEnergy(AmmoAmount);
         Die();
     }
     public void ChangeAmmo(float amount)
@@ -35,10 +34,10 @@ public class AmmoItem : PickableItem {
     {
         picked = true;
         this.enabled = false;
-        transform.GetChild(0).gameObject.SetActive(false);
 
         vfx.SetActive(true);
-        Destroy(gameObject, 2);
+        vfx.transform.SetParent(null);
+        Destroy(gameObject);
     }
 
 }

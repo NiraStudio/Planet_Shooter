@@ -13,24 +13,30 @@ public class SoldierLevelMode : LevelModeEnemy {
     public override void Update()
     {
         base.Update();
+        if (LM.gamePlayState != GamePlayState.Play)
+            return;
         if (t < waitTime)
         {
             t += Time.deltaTime;
             if (t >= waitTime)
-                PlayAttackAnimation();
+              StartCoroutine(  PlayAttackAnimation());
         }
 
     }
 
-    public void PlayAttackAnimation()
+    public IEnumerator PlayAttackAnimation()
     {
         anim.SetTrigger("Shoot");
-        Stop(0.5f);
+        Stop(.8f);
+        yield return new WaitForSeconds(0.5f);
+        Shoot();
+        
+
     }
     public void Shoot()
     {
         b = Instantiate(Bullet, ShootPos.position, Quaternion.identity);
-        b.GetComponent<Bullet>().Release(direction, dmg);
+        b.GetComponent<Bullet>().Release(direction, dmg,gameObject.transform);
         if (Random.Range(0, 100) <= 30)
             Turn();
     }
@@ -40,7 +46,7 @@ public class SoldierLevelMode : LevelModeEnemy {
     }
     public override void OnCharacterEnter()
     {
-        characterCollider.GetComponent<Ihitable>().OnHit(dmg/2);
+        characterCollider.GetComponent<Ihitable>().OnHit(dmg/2,transform);
 
     }
 }

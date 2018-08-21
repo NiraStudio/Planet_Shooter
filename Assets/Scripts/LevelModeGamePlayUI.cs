@@ -16,24 +16,20 @@ public class LevelModeGamePlayUI : MonoBehaviour {
 
 
     public LocalizedDynamicText WaveCounter,CoinCounter,ScoreText,TimeText;
-    public Slider AmmoBar, HpBar;
+    public CharacterHolder character;
     
     [SerializeField]
     Animator coinShockAnimator;
 
     LevelModeGameManager LM;
-    CharacterHolder CH;
     Weapon weapon;
     string PersianText, EnglishText;
 
     bool ready;
 	// Use this for initialization
-	IEnumerator Start () {
-        CH = CharacterHolder.Instance;
-        yield return new WaitUntil(() => CH.weapon != null);
-        weapon = CH.weapon;
-        AmmoBar.maxValue = weapon.MaxAmmo;
-        HpBar.maxValue = CH.MaxHp;
+	void Start () {
+       
+        
         LM = LevelModeGameManager.LPM;
         ready = true;
 	}
@@ -43,13 +39,9 @@ public class LevelModeGamePlayUI : MonoBehaviour {
         if (!ready)
             return;
 
-        ScoreText.text = LM.Score.ToString() ;
+        ScoreText.text = LM.coin.ToString() ;
 
-        AmmoBar.maxValue = weapon.MaxAmmo;
-        HpBar.maxValue = CH.MaxHp;
-
-        AmmoBar.value = weapon.Ammo;
-        HpBar.value = Mathf.Lerp(HpBar.value,CH._hp,0.1f);
+       
 
         ChangeTimeText(LM.timeSpend);
         

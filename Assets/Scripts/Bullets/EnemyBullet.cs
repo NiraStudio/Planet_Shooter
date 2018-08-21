@@ -8,11 +8,16 @@ public class EnemyBullet : Bullet ,Ihitable {
         Destroy(gameObject);
     }
 
-    public void OnHeal(float Amount)
+    public void OnDie(Transform Killer)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void OnHeal(float Amount,Transform Healer)
     {
     }
 
-    public void OnHit(float dmg)
+    public void OnHit(float dmg, Transform Hiter)
     {
         OnDie();
     }

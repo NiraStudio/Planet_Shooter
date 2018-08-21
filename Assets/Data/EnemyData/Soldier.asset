@@ -13,6 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Soldier
   speed: 2
-  hitPoint: 2
+  hitPoint: 3
   dmg: 2
-  CoindCapacity: 0
+  CoindCapacity: 2
